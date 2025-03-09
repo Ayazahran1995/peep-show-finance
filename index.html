@@ -3,111 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finance, But in Peep Show Style</title>
+    <title>Finance Explained, But With More Despair</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #1c1c1c;
+            color: #d1d1d1;
             text-align: center;
-            margin: 50px;
-            background-color: #1e1e1e;
-            color: #fff;
+            padding: 50px;
         }
         h1 {
-            font-size: 28px;
+            color: #ffffff;
+            font-size: 2em;
+            margin-bottom: 20px;
         }
-        select, button {
-            font-size: 18px;
-            padding: 10px;
-            margin: 10px;
-            border: none;
-            cursor: pointer;
-        }
-        select {
-            background-color: #333;
-            color: white;
-        }
-        button {
-            background-color: #ff5722;
-            color: white;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #e64a19;
-        }
-        #output {
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 20px;
+        .term-container {
+            background: #292929;
             padding: 20px;
-            background-color: #292929;
-            border-radius: 10px;
+            border-radius: 8px;
             display: inline-block;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
         }
-        .disclaimer {
-            font-size: 12px;
-            color: #bbb;
-            margin-top: 30px;
+        .term {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .explanation {
+            font-size: 1em;
+            margin-bottom: 20px;
+            color: #bbbbbb;
+        }
+        .cta-buttons button {
+            background: #3a3a3a;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: 0.3s;
+        }
+        .cta-buttons button:hover {
+            background: #505050;
         }
     </style>
 </head>
 <body>
 
-    <h1>🟦 Finance Explained, But With More Despair.</h1> <!-- Updated header -->
+    <h1>🟦 Finance Explained, But With More Despair.</h1>
 
-    <label for="financeTermSelect">Pick a financial term:</label>
-    <select id="financeTermSelect">
-        <option value="overdraft">Overdraft</option>
-        <option value="credit_score">Credit Score</option>
-        <option value="savings_account">Savings Account</option>
-        <option value="investing">Investing</option>
-        <option value="crypto">Cryptocurrency</option>
-        <option value="inflation">Inflation</option>
-        <option value="nfts">NFTs</option>
-        <option value="bnpl">Buy Now, Pay Later</option>
-        <option value="pension">Pension</option>
-        <option value="mortgage">Mortgage</option>
-        <option value="hedge_funds">Hedge Funds</option>
-        <option value="recession">Recession</option>
-    </select>
+    <div class="term-container">
+        <div class="term" id="term">Loading misery...</div>
+        <div class="explanation" id="explanation">Please hold. Doom is buffering.</div>
+    </div>
 
-    <button onclick="generateResponse()">Explain It</button>
-    
-    <div id="output"></div>
-    
-    <p class="disclaimer">Inspired by Peep Show, but not affiliated with or endorsed by Channel 4 or its creators.</p>
+    <div class="cta-buttons">
+        <button onclick="generateTerm()">Tell Me How I’m Screwed</button>
+
+        <button onclick="simplifyExplanation()">Explain This Like I’m Destined for Debt</button>
+        <button onclick="generateTerm()">Show Me The Doom</button>
+    </div>
+
+    <script>
+        const financeTerms = [
+            {
+                term: "Overdraft",
+                explanation: "An overdraft is your bank saying, ‘Go on then, have some money you don’t have.’ But the catch is, it’s actually their money, and they’ll want it back. With interest. And disappointment."
+            },
+            {
+                term: "Credit Score",
+                explanation: "Your credit score is basically a trust rating given to you by an algorithm that decided, years ago, that you were financially irresponsible. And it's never forgiven you."
+            },
+            {
+                term: "Savings Account",
+                explanation: "A savings account is a magical place where you put your money so the bank can use it, while giving you just enough interest to afford half a Tesco meal deal after a decade."
+            },
+            {
+                term: "Investing",
+                explanation: "Investing is gambling, but if you do it in a suit, it’s called ‘financial planning.’ The stock market is basically a mood ring for rich people."
+            },
+            {
+                term: "Crypto",
+                explanation: "Crypto is digital magic beans. Sometimes they make you rich, sometimes they make you cry, and usually, they do both in the same week."
+            },
+            {
+                term: "Inflation",
+                explanation: "Inflation is when everything costs more, but your salary stays the same. It’s like trying to run up an escalator that’s going down. And it's on fire."
+            },
+            {
+                term: "NFTs",
+                explanation: "NFTs are like buying an expensive painting, except there’s no painting. Just the ‘vibes’ of a painting. Oh, and your vibes are now worth 3p."
+            },
+            {
+                term: "Buy Now, Pay Later (BNPL)",
+                explanation: "Buy Now, Pay Later is basically Future You’s problem. Except Future You is already drowning in bad financial decisions. Cheers, mate."
+            },
+            {
+                term: "Pension",
+                explanation: "A pension is a slow-motion heist where you spend decades trying to save enough money to retire, but by the time you do, they’ve moved the goalposts to ‘work until you drop.’"
+            },
+            {
+                term: "Mortgage",
+                explanation: "A mortgage is a 25-year deal where you rent from the bank, except instead of a landlord, you have an interest rate that judges you."
+            },
+            {
+                term: "Hedge Funds",
+                explanation: "A hedge fund is just a way for rich people to gamble using money that isn't theirs, and when they lose, the government buys them a new yacht."
+            },
+            {
+                term: "Recession",
+                explanation: "A recession is when the economy has a panic attack and suddenly everyone pretends they didn’t see it coming. Again."
+            }
+        ];
+
+        let currentTermIndex = 0;
+        let isExpanded = false;
+
+        function generateTerm() {
+            isExpanded = false;
+            currentTermIndex = Math.floor(Math.random() * financeTerms.length);
+            document.getElementById("term").textContent = financeTerms[currentTermIndex].term;
+            document.getElementById("explanation").textContent = financeTerms[currentTermIndex].explanation;
+        }
+
+     
+        function simplifyExplanation() {
+            let simplified = {
+                "Overdraft": "The bank lets you borrow money. Then makes you regret it.",
+                "Credit Score": "An algorithm rates how badly it trusts you. Usually, not much.",
+                "Savings Account": "You give the bank your money. They give you dust in return.",
+                "Investing": "Legal gambling, but only if you're rich or lucky.",
+                "Crypto": "Sometimes you win, mostly you lose. But hey, decentralization!",
+                "Inflation": "Everything gets more expensive. Your salary doesn’t. Enjoy.",
+                "NFTs": "You own the idea of a thing, not the thing itself. Congrats.",
+                "Buy Now, Pay Later (BNPL)": "You buy things now. Future You suffers later.",
+                "Pension": "You save money for retirement. By the time you retire, it’s not enough.",
+                "Mortgage": "You rent from the bank for decades. They’re your new landlord.",
+                "Hedge Funds": "Rich people gamble with other people’s money. It’s fine. For them.",
+                "Recession": "Everyone loses money. Except billionaires. They do fine."
+            };
+
+            document.getElementById("explanation").textContent = simplified[financeTerms[currentTermIndex].term];
+        }
+
+        // Load first term on page load
+        generateTerm();
+    </script>
 
 </body>
-<script>
-    function generateResponse() {
-        const financeTerm = document.getElementById("financeTermSelect").value;
-        const explanations = {
-            overdraft: "An overdraft is your bank saying, ‘Go on then, have some money you don’t have.’ But the catch is, it’s actually their money, and they’ll want it back. With interest. And disappointment.",
-            
-            credit_score: "Your credit score is basically a trust rating given to you by an algorithm that decided, years ago, that you were financially irresponsible. And it's never forgiven you.",
-            
-            savings_account: "A savings account is a magical place where you put your money so the bank can use it, while giving you just enough interest to afford half a Tesco meal deal after a decade.",
-            
-            investing: "Investing is gambling, but if you do it in a suit, it’s called ‘financial planning.’ The stock market is basically a mood ring for rich people.",
-            
-            crypto: "Crypto is digital magic beans. Sometimes they make you rich, sometimes they make you cry, and usually, they do both in the same week.",
-            
-            inflation: "Inflation is when everything costs more, but your salary stays the same. It’s like trying to run up an escalator that’s going down. And it's on fire.",
-            
-            nfts: "NFTs are like buying an expensive painting, except there’s no painting. Just the ‘vibes’ of a painting. Oh, and your vibes are now worth 3p.",
-            
-            bnpl: "Buy Now, Pay Later is basically Future You’s problem. Except Future You is already drowning in bad financial decisions. Cheers, mate.",
-            
-            pension: "A pension is a slow-motion heist where you spend decades trying to save enough money to retire, but by the time you do, they’ve moved the goalposts to ‘work until you drop.’",
-            
-            mortgage: "A mortgage is a 25-year deal where you rent from the bank, except instead of a landlord, you have an interest rate that judges you.",
-            
-            hedge_funds: "A hedge fund is just a way for rich people to gamble using money that isn't theirs, and when they lose, the government buys them a new yacht.",
-            
-            recession: "A recession is when the economy has a panic attack and suddenly everyone pretends they didn’t see it coming. Again."
-        };
-
-        document.getElementById("output").innerHTML = explanations[financeTerm] || "No idea what this is, but it probably costs you money.";
-    }
-</script>
 </html>
 
