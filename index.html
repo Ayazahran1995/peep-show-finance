@@ -52,8 +52,8 @@
 </head>
 <body>
 
-    <h1>Finance, But in Peep Show Style</h1>
-    
+    <h1>🟦 Finance Explained, But With More Despair.</h1> <!-- Updated header -->
+
     <label for="financeTermSelect">Pick a financial term:</label>
     <select id="financeTermSelect">
         <option value="overdraft">Overdraft</option>
@@ -81,21 +81,33 @@
     function generateResponse() {
         const financeTerm = document.getElementById("financeTermSelect").value;
         const explanations = {
-            overdraft: "An overdraft is your bank letting you borrow money you don’t have. It’s like being paid to be poor, but with interest.",
-            credit_score: "Your credit score is basically your financial Tinder profile. If it's bad, banks swipe left.",
-            savings_account: "A savings account is where you put your money so the bank can use it, while you earn less interest than inflation steals from you.",
-            investing: "Investing is gambling, but when rich people do it, it’s called ‘wealth management.’",
-            crypto: "Cryptocurrency is like magic internet money that sometimes makes you rich and sometimes makes you cry.",
-            inflation: "Inflation is when your money is still money, but it buys you less than it did last week.",
-            nfts: "NFTs are like buying an expensive painting, except the painting doesn’t exist, and you can’t hang it on your wall.",
-            bnpl: "Buy Now, Pay Later is a scheme where you trick yourself into thinking you can afford something. Future You will be furious.",
-            pension: "A pension is like a very slow-growing plant that you hope will feed you when you're old, unless the government accidentally steps on it.",
-            mortgage: "A mortgage is renting from the bank, but instead of a landlord, you have debt for 25 years.",
-            hedge_funds: "Hedge funds are like a casino for rich people, except when they lose, they take your tax money to stay afloat.",
-            recession: "A recession is when the economy has a breakdown and everyone acts shocked, even though it happens every few years."
+            overdraft: "An overdraft is your bank saying, ‘Go on then, have some money you don’t have.’ But the catch is, it’s actually their money, and they’ll want it back. With interest. And disappointment.",
+            
+            credit_score: "Your credit score is basically a trust rating given to you by an algorithm that decided, years ago, that you were financially irresponsible. And it's never forgiven you.",
+            
+            savings_account: "A savings account is a magical place where you put your money so the bank can use it, while giving you just enough interest to afford half a Tesco meal deal after a decade.",
+            
+            investing: "Investing is gambling, but if you do it in a suit, it’s called ‘financial planning.’ The stock market is basically a mood ring for rich people.",
+            
+            crypto: "Crypto is digital magic beans. Sometimes they make you rich, sometimes they make you cry, and usually, they do both in the same week.",
+            
+            inflation: "Inflation is when everything costs more, but your salary stays the same. It’s like trying to run up an escalator that’s going down. And it's on fire.",
+            
+            nfts: "NFTs are like buying an expensive painting, except there’s no painting. Just the ‘vibes’ of a painting. Oh, and your vibes are now worth 3p.",
+            
+            bnpl: "Buy Now, Pay Later is basically Future You’s problem. Except Future You is already drowning in bad financial decisions. Cheers, mate.",
+            
+            pension: "A pension is a slow-motion heist where you spend decades trying to save enough money to retire, but by the time you do, they’ve moved the goalposts to ‘work until you drop.’",
+            
+            mortgage: "A mortgage is a 25-year deal where you rent from the bank, except instead of a landlord, you have an interest rate that judges you.",
+            
+            hedge_funds: "A hedge fund is just a way for rich people to gamble using money that isn't theirs, and when they lose, the government buys them a new yacht.",
+            
+            recession: "A recession is when the economy has a panic attack and suddenly everyone pretends they didn’t see it coming. Again."
         };
 
         document.getElementById("output").innerHTML = explanations[financeTerm] || "No idea what this is, but it probably costs you money.";
     }
 </script>
 </html>
+
