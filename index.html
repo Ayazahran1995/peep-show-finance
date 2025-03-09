@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance, But in Peep Show Style</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #1e1e1e;
+            color: #fff;
+        }
+        h1 {
+            font-size: 28px;
+        }
+        select, button {
+            font-size: 18px;
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        select {
+            background-color: #333;
+            color: white;
+        }
+        button {
+            background-color: #ff5722;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #e64a19;
+        }
+        #output {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #292929;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .disclaimer {
+            font-size: 12px;
+            color: #bbb;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Finance, But in Peep Show Style</h1>
+    
+    <label for="financeTermSelect">Pick a financial term:</label>
+    <select id="financeTermSelect">
+        <option value="overdraft">Overdraft</option>
+        <option value="credit_score">Credit Score</option>
+        <option value="savings_account">Savings Account</option>
+        <option value="investing">Investing</option>
+        <option value="crypto">Cryptocurrency</option>
+        <option value="inflation">Inflation</option>
+        <option value="nfts">NFTs</option>
+        <option value="bnpl">Buy Now, Pay Later</option>
+        <option value="pension">Pension</option>
+        <option value="mortgage">Mortgage</option>
+        <option value="hedge_funds">Hedge Funds</option>
+        <option value="recession">Recession</option>
+    </select>
+
+    <button onclick="generateResponse()">Explain It</button>
+    
+    <div id="output"></div>
+    
+    <p class="disclaimer">Inspired by Peep Show, but not affiliated with or endorsed by Channel 4 or its creators.</p>
+
+</body>
+<script>
+    function generateResponse() {
+        const financeTerm = document.getElementById("financeTermSelect").value;
+        const explanations = {
+            overdraft: "An overdraft is your bank letting you borrow money you don’t have. It’s like being paid to be poor, but with interest.",
+            credit_score: "Your credit score is basically your financial Tinder profile. If it's bad, banks swipe left.",
+            savings_account: "A savings account is where you put your money so the bank can use it, while you earn less interest than inflation steals from you.",
+            investing: "Investing is gambling, but when rich people do it, it’s called ‘wealth management.’",
+            crypto: "Cryptocurrency is like magic internet money that sometimes makes you rich and sometimes makes you cry.",
+            inflation: "Inflation is when your money is still money, but it buys you less than it did last week.",
+            nfts: "NFTs are like buying an expensive painting, except the painting doesn’t exist, and you can’t hang it on your wall.",
+            bnpl: "Buy Now, Pay Later is a scheme where you trick yourself into thinking you can afford something. Future You will be furious.",
+            pension: "A pension is like a very slow-growing plant that you hope will feed you when you're old, unless the government accidentally steps on it.",
+            mortgage: "A mortgage is renting from the bank, but instead of a landlord, you have debt for 25 years.",
+            hedge_funds: "Hedge funds are like a casino for rich people, except when they lose, they take your tax money to stay afloat.",
+            recession: "A recession is when the economy has a breakdown and everyone acts shocked, even though it happens every few years."
+        };
+
+        document.getElementById("output").innerHTML = explanations[financeTerm] || "No idea what this is, but it probably costs you money.";
+    }
+</script>
+</html>
