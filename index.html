@@ -57,9 +57,9 @@
             padding: 20px;
             max-width: 800px;
             margin: 20px;
-            background: rgba(0, 0, 0, 0.5); /* semi-transparent */
+            background: rgba(0, 0, 0, 0.5);
             border-radius: 20px;
-            backdrop-filter: blur(8px); /* glassmorphism effect */
+            backdrop-filter: blur(10px);
             animation: fadeIn 0.8s ease;
         }
 
@@ -75,12 +75,16 @@
             line-height: 1.5;
         }
 
+        .scenario {
+            font-family: 'Neue Machina Light', sans-serif;
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 15px;
+            font-style: italic;
+        }
+
         .cta-buttons {
-            display: flex;
-            gap: 20px;
             margin-top: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
         }
 
         .cta-buttons button {
@@ -88,6 +92,7 @@
             border: 2px solid white;
             color: white;
             padding: 15px 25px;
+            margin: 10px;
             border-radius: 50px;
             cursor: pointer;
             font-size: 1em;
@@ -97,6 +102,17 @@
         .cta-buttons button:hover {
             background: white;
             color: black;
+        }
+
+        #doom-counter {
+            font-family: 'Neue Machina', sans-serif;
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(8px);
         }
 
         @keyframes fadeIn {
@@ -109,27 +125,8 @@
                 transform: translateY(0);
             }
         }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            .term {
-                font-size: 2em;
-            }
-
-            .explanation {
-                font-size: 1.2em;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-        }
     </style>
 </head>
-
 <body>
 
     <h1>🟦 Finance Explained, But With More Despair.</h1>
@@ -137,11 +134,15 @@
     <div class="term-container" id="term-container">
         <div class="term" id="term">Loading misery...</div>
         <div class="explanation" id="explanation">Please hold. Doom is buffering.</div>
+        <div class="scenario" id="scenario">*Awkward scenario loading...*</div>
+    </div>
+
+    <div id="doom-counter">
+        Doom Level: <span id="doom-count">0</span> - <span id="doom-message">Welcome to Despair.</span>
     </div>
 
     <div class="cta-buttons">
-        <button onclick="generateTerm()">Show Me The Doom</button>
-        <button onclick="simplifyExplanation()">Explain This Like I’m Destined for Debt</button>
+        <button onclick="generateTerm()">Make It Worse</button>
     </div>
 
     <script>
@@ -160,41 +161,61 @@
             { term: "Recession", explanation: "A recession is when the economy has a panic attack and suddenly everyone pretends they didn’t see it coming. Again." }
         ];
 
-        const simplifiedExplanations = {
-            "Overdraft": "The bank lets you borrow money. Then makes you regret it.",
-            "Credit Score": "An algorithm rates how badly it trusts you. Usually, not much.",
-            "Savings Account": "You give the bank your money. They give you dust in return.",
-            "Investing": "Legal gambling, but only if you're rich or lucky.",
-            "Crypto": "Sometimes you win, mostly you lose. But hey, decentralization!",
-            "Inflation": "Everything gets more expensive. Your salary doesn’t. Enjoy.",
-            "NFTs": "You own the idea of a thing, not the thing itself. Congrats.",
-            "Buy Now, Pay Later (BNPL)": "You buy things now. Future You suffers later.",
-            "Pension": "You save money for retirement. By the time you retire, it’s not enough.",
-            "Mortgage": "You rent from the bank for decades. They’re your new landlord.",
-            "Hedge Funds": "Rich people gamble with other people’s money. It’s fine. For them.",
-            "Recession": "Everyone loses money. Except billionaires. They do fine."
+        const scenarios = {
+            "Overdraft": "You check your balance and see you’re £50 overdrawn. You call the bank, and they say, ‘It’s fine, just pay us back with interest.’ You hang up and eat beans straight from the can for dinner.",
+            "Credit Score": "You apply for a credit card and get rejected. The letter says, ‘We regret to inform you.’ You regret everything.",
+            "Savings Account": "You check your savings account after a year. The interest is £0.12. You celebrate by buying a single grape.",
+            "Investing": "You invest in a ‘sure thing’ stock. It drops 80% in a week. You tell yourself it’s a ‘long-term investment.’",
+            "Crypto": "You buy £100 of Dogecoin because Elon Musk tweeted about it. A week later, it’s worth £12. You tell yourself it’s a ‘long-term investment,’ but deep down, you know you’ve been scammed.",
+            "Inflation": "You go to the supermarket and realize a loaf of bread now costs £5. You cry in the cereal aisle.",
+            "NFTs": "You spend £500 on an NFT of a cartoon ape. A week later, it’s worth £3. You tell your friends it’s ‘art.’ They stop returning your calls.",
+            "Buy Now, Pay Later (BNPL)": "You buy a new TV with BNPL. A month later, you’re eating instant noodles for every meal. Future You hates Present You.",
+            "Pension": "You finally check your pension statement. It says you’ll retire at 85. You laugh, then cry, then laugh again because what else can you do?",
+            "Mortgage": "You finally get a mortgage after years of saving. The bank says, ‘Congratulations, you’re now in debt for the next 25 years.’ You celebrate by crying into a cup of instant coffee.",
+            "Hedge Funds": "You read about hedge funds in the news. They lost billions. The government bailed them out. You lost £20 on a bad bet. No one bailed you out.",
+            "Recession": "You lose your job during the recession. Your mate says, ‘At least you’ve got your health!’ You cough nervously and change the subject."
         };
 
+        const doomMessages = [
+            "Welcome to Despair. It only gets worse from here.",
+            "Doom Level: Mild. Like a drizzle of regret.",
+            "Doom Level: Moderate. You’re getting the hang of this. Unfortunately.",
+            "Doom Level: High. Like a slow-motion car crash.",
+            "Doom Level: Severe. You’re in too deep now.",
+            "Doom Level: Catastrophic. Why do you keep clicking?",
+            "Doom Level: Apocalyptic. You’ve reached peak despair.",
+            "Doom Level: Maximum Despair Achieved. Congratulations?"
+        ];
+
         let currentTermIndex = 0;
+        let doomCount = 0;
 
         function generateTerm() {
             currentTermIndex = Math.floor(Math.random() * financeTerms.length);
             const container = document.getElementById('term-container');
-            container.style.animation = 'none'; // reset animation
-            void container.offsetWidth; // trigger reflow
+            container.style.animation = 'none';
+            void container.offsetWidth;
             container.style.animation = 'fadeIn 0.8s ease';
 
-            document.getElementById("term").textContent = financeTerms[currentTermIndex].term;
-            document.getElementById("explanation").textContent = financeTerms[currentTermIndex].explanation;
-        }
-
-        function simplifyExplanation() {
             const term = financeTerms[currentTermIndex].term;
-            document.getElementById("explanation").textContent = simplifiedExplanations[term];
+            document.getElementById("term").textContent = term;
+            document.getElementById("explanation").textContent = financeTerms[currentTermIndex].explanation;
+            document.getElementById("scenario").textContent = scenarios[term] || "*Your life is a series of poor decisions.*";
+
+            updateDoomCounter();
         }
 
-        // Auto-rotate every 8 seconds
-        setInterval(generateTerm, 8000);
+        function updateDoomCounter() {
+            doomCount++;
+            const doomCountElement = document.getElementById('doom-count');
+            const doomMessageElement = document.getElementById('doom-message');
+
+            doomCountElement.textContent = doomCount;
+            doomMessageElement.textContent = doomMessages[Math.min(doomCount, doomMessages.length - 1)];
+        }
+
+        // Load first term on page load
+        generateTerm();
     </script>
 
 </body>
