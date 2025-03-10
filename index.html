@@ -21,9 +21,9 @@
             margin: 0;
             padding: 0;
             font-family: 'Neue Machina', sans-serif;
-            color: white; /* White text to pop on dark background */
+            color: white;
             text-align: center;
-            background: transparent; /* Fully transparent background */
+            background: transparent;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -45,7 +45,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            z-index: -1; /* Behind the text */
+            z-index: -1;
         }
 
         h1 {
@@ -57,6 +57,10 @@
             padding: 20px;
             max-width: 800px;
             margin: 20px;
+            background: rgba(0, 0, 0, 0.5); /* semi-transparent */
+            border-radius: 20px;
+            backdrop-filter: blur(8px); /* glassmorphism effect */
+            animation: fadeIn 0.8s ease;
         }
 
         .term {
@@ -71,12 +75,19 @@
             line-height: 1.5;
         }
 
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         .cta-buttons button {
             background: transparent;
             border: 2px solid white;
             color: white;
             padding: 15px 25px;
-            margin: 10px;
             border-radius: 50px;
             cursor: pointer;
             font-size: 1em;
@@ -87,21 +98,50 @@
             background: white;
             color: black;
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .term {
+                font-size: 2em;
+            }
+
+            .explanation {
+                font-size: 1.2em;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <h1>🟦 Finance Explained, But With More Despair.</h1>
 
-    <div class="term-container">
+    <div class="term-container" id="term-container">
         <div class="term" id="term">Loading misery...</div>
         <div class="explanation" id="explanation">Please hold. Doom is buffering.</div>
     </div>
 
     <div class="cta-buttons">
-        <button onclick="generateTerm()">Tell Me How I’m Screwed</button>
-        <button onclick="simplifyExplanation()">Explain This Like I’m Destined for Debt</button>
         <button onclick="generateTerm()">Show Me The Doom</button>
+        <button onclick="simplifyExplanation()">Explain This Like I’m Destined for Debt</button>
     </div>
 
     <script>
@@ -139,6 +179,11 @@
 
         function generateTerm() {
             currentTermIndex = Math.floor(Math.random() * financeTerms.length);
+            const container = document.getElementById('term-container');
+            container.style.animation = 'none'; // reset animation
+            void container.offsetWidth; // trigger reflow
+            container.style.animation = 'fadeIn 0.8s ease';
+
             document.getElementById("term").textContent = financeTerms[currentTermIndex].term;
             document.getElementById("explanation").textContent = financeTerms[currentTermIndex].explanation;
         }
@@ -148,8 +193,8 @@
             document.getElementById("explanation").textContent = simplifiedExplanations[term];
         }
 
-        // Load first term on page load
-        generateTerm();
+        // Auto-rotate every 8 seconds
+        setInterval(generateTerm, 8000);
     </script>
 
 </body>
