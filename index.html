@@ -10,13 +10,11 @@
         @font-face {
             font-family: 'Neue Machina';
             src: url('PPNeueMachina-Regular.otf') format('opentype');
-            font-weight: normal;
         }
 
         @font-face {
             font-family: 'Neue Machina Light';
             src: url('PPNeueMachina-Light.otf') format('opentype');
-            font-weight: 300;
         }
 
         body {
@@ -39,45 +37,41 @@
         h1 {
             font-size: 3em;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
         }
 
         .term-container {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 30px;
-            border-radius: 16px;
+            padding: 20px;
             max-width: 800px;
             margin: 20px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
         }
 
         .term {
-            font-size: 2em;
+            font-size: 2.5em;
             font-weight: bold;
             margin-bottom: 15px;
         }
 
         .explanation {
             font-family: 'Neue Machina Light', sans-serif;
-            font-size: 1.2em;
+            font-size: 1.4em;
             line-height: 1.5;
         }
 
         .cta-buttons button {
-            background: rgba(255, 255, 255, 0.1);
+            background: transparent;
             border: 2px solid #fff;
             color: #fff;
-            padding: 15px 20px;
+            padding: 15px 25px;
             margin: 10px;
             border-radius: 50px;
             cursor: pointer;
             font-size: 1em;
-            transition: 0.3s;
-            backdrop-filter: blur(5px);
+            transition: 0.3s ease;
         }
 
         .cta-buttons button:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: #fff;
+            color: #000;
         }
     </style>
 </head>
@@ -98,39 +92,33 @@
 
     <script>
         const financeTerms = [
-            {
-                term: "Stock Market",
-                explanation: "The stock market is like a massive, unpredictable roller coaster that everyone insists you ride. You buy a ticket, strap in, and hope you don't vomit your savings all over your future."
-            },
-            {
-                term: "Economic Crash",
-                explanation: "An economic crash is when the financial world decides to play a massive game of Jenga, and someone just pulled out the wrong block. Suddenly, everyone's investments come tumbling down, and we're left picking up the pieces."
-            },
-            {
-                term: "Compound Interest",
-                explanation: "Compound interest is like that snowball you start rolling down a hill. At first, it's small and manageable, but give it time, and it becomes an unstoppable force—either building your wealth or crushing you under debt."
-            },
-            {
-                term: "Inflation",
-                explanation: "Inflation is that sneaky thief who comes in at night and makes sure that the money under your mattress buys you less and less each year. It's like running on a treadmill that's speeding up."
-            },
-            {
-                term: "Diversification",
-                explanation: "Diversification is the financial equivalent of not putting all your eggs in one basket because life has a habit of kicking baskets over when you least expect it."
-            },
-            {
-                term: "Liquidity",
-                explanation: "Liquidity is how quickly you can convert your assets into cash without selling a kidney. It's like having money in a savings account versus owning a rare collectible no one wants to buy."
-            }
+            { term: "Overdraft", explanation: "An overdraft is your bank saying, ‘Go on then, have some money you don’t have.’ But the catch is, it’s actually their money, and they’ll want it back. With interest. And disappointment." },
+            { term: "Credit Score", explanation: "Your credit score is basically a trust rating given to you by an algorithm that decided, years ago, that you were financially irresponsible. And it's never forgiven you." },
+            { term: "Savings Account", explanation: "A savings account is a magical place where you put your money so the bank can use it, while giving you just enough interest to afford half a Tesco meal deal after a decade." },
+            { term: "Investing", explanation: "Investing is gambling, but if you do it in a suit, it’s called ‘financial planning.’ The stock market is basically a mood ring for rich people." },
+            { term: "Crypto", explanation: "Crypto is digital magic beans. Sometimes they make you rich, sometimes they make you cry, and usually, they do both in the same week." },
+            { term: "Inflation", explanation: "Inflation is when everything costs more, but your salary stays the same. It’s like trying to run up an escalator that’s going down. And it's on fire." },
+            { term: "NFTs", explanation: "NFTs are like buying an expensive painting, except there’s no painting. Just the ‘vibes’ of a painting. Oh, and your vibes are now worth 3p." },
+            { term: "Buy Now, Pay Later (BNPL)", explanation: "Buy Now, Pay Later is basically Future You’s problem. Except Future You is already drowning in bad financial decisions. Cheers, mate." },
+            { term: "Pension", explanation: "A pension is a slow-motion heist where you spend decades trying to save enough money to retire, but by the time you do, they’ve moved the goalposts to ‘work until you drop.’" },
+            { term: "Mortgage", explanation: "A mortgage is a 25-year deal where you rent from the bank, except instead of a landlord, you have an interest rate that judges you." },
+            { term: "Hedge Funds", explanation: "A hedge fund is just a way for rich people to gamble using money that isn't theirs, and when they lose, the government buys them a new yacht." },
+            { term: "Recession", explanation: "A recession is when the economy has a panic attack and suddenly everyone pretends they didn’t see it coming. Again." }
         ];
 
         const simplifiedExplanations = {
-            "Stock Market": "A place where people buy and sell tiny pieces of companies, hoping to make money, but often just fueling their anxiety.",
-            "Economic Crash": "A sudden, severe downturn in the economy, making everyone's money feel like it's evaporating.",
-            "Compound Interest": "Interest that earns interest, making your money grow faster—or your debt spiral out of control.",
-            "Inflation": "When prices rise over time, decreasing the purchasing power of your money.",
-            "Diversification": "Spreading your investments across assets to reduce risk.",
-            "Liquidity": "How easily you can turn your assets into cash."
+            "Overdraft": "The bank lets you borrow money. Then makes you regret it.",
+            "Credit Score": "An algorithm rates how badly it trusts you. Usually, not much.",
+            "Savings Account": "You give the bank your money. They give you dust in return.",
+            "Investing": "Legal gambling, but only if you're rich or lucky.",
+            "Crypto": "Sometimes you win, mostly you lose. But hey, decentralization!",
+            "Inflation": "Everything gets more expensive. Your salary doesn’t. Enjoy.",
+            "NFTs": "You own the idea of a thing, not the thing itself. Congrats.",
+            "Buy Now, Pay Later (BNPL)": "You buy things now. Future You suffers later.",
+            "Pension": "You save money for retirement. By the time you retire, it’s not enough.",
+            "Mortgage": "You rent from the bank for decades. They’re your new landlord.",
+            "Hedge Funds": "Rich people gamble with other people’s money. It’s fine. For them.",
+            "Recession": "Everyone loses money. Except billionaires. They do fine."
         };
 
         let currentTermIndex = 0;
