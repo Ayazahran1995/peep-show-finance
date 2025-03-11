@@ -41,7 +41,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('Hide & Seek Time! (1).png'); /* Replace with stock market background */
+            background-image: url('Hide & Seek Time!(1).png'); /* Replace with stock market background */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -49,13 +49,13 @@
         }
 
         h1 {
-            font-size: 3em;
+            font-size: 8vw; /* Responsive font size */
             margin-bottom: 20px;
         }
 
         .term-container {
             padding: 20px;
-            max-width: 800px;
+            max-width: 90%; /* Adjust for smaller screens */
             margin: 20px;
             background: rgba(0, 0, 0, 0.5);
             border-radius: 20px;
@@ -64,20 +64,20 @@
         }
 
         .term {
-            font-size: 2.5em;
+            font-size: 6vw; /* Responsive font size */
             font-weight: bold;
             margin-bottom: 15px;
         }
 
         .explanation {
             font-family: 'Neue Machina Light', sans-serif;
-            font-size: 1.4em;
+            font-size: 4vw; /* Responsive font size */
             line-height: 1.5;
         }
 
         .scenario {
             font-family: 'Neue Machina Light', sans-serif;
-            font-size: 1.2em;
+            font-size: 3.5vw; /* Responsive font size */
             color: rgba(255, 255, 255, 0.8);
             margin-top: 15px;
             font-style: italic;
@@ -85,6 +85,9 @@
 
         .cta-buttons {
             margin-top: 20px;
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically on mobile */
+            gap: 10px; /* Space between buttons */
         }
 
         .cta-buttons button {
@@ -92,10 +95,9 @@
             border: 2px solid white;
             color: white;
             padding: 15px 25px;
-            margin: 10px;
             border-radius: 50px;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 4vw; /* Responsive font size */
             transition: all 0.3s ease;
         }
 
@@ -106,7 +108,7 @@
 
         #doom-counter {
             font-family: 'Neue Machina', sans-serif;
-            font-size: 1.2em;
+            font-size: 4vw; /* Responsive font size */
             margin-top: 20px;
             color: white;
             background: rgba(0, 0, 0, 0.5);
@@ -117,14 +119,14 @@
 
         #progress {
             font-family: 'Neue Machina Light', sans-serif;
-            font-size: 1em;
+            font-size: 3.5vw; /* Responsive font size */
             margin-top: 10px;
             color: rgba(255, 255, 255, 0.8);
         }
 
         #achievements {
             font-family: 'Neue Machina Light', sans-serif;
-            font-size: 1em;
+            font-size: 3.5vw; /* Responsive font size */
             margin-top: 10px;
             color: rgba(255, 255, 255, 0.8);
         }
@@ -137,6 +139,41 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        /* Media query for larger screens */
+        @media (min-width: 600px) {
+            h1 {
+                font-size: 3em; /* Fixed font size for desktop */
+            }
+
+            .term {
+                font-size: 2.5em; /* Fixed font size for desktop */
+            }
+
+            .explanation {
+                font-size: 1.4em; /* Fixed font size for desktop */
+            }
+
+            .scenario {
+                font-size: 1.2em; /* Fixed font size for desktop */
+            }
+
+            .cta-buttons {
+                flex-direction: row; /* Buttons side by side on desktop */
+            }
+
+            .cta-buttons button {
+                font-size: 1em; /* Fixed font size for desktop */
+            }
+
+            #doom-counter {
+                font-size: 1.2em; /* Fixed font size for desktop */
+            }
+
+            #progress, #achievements {
+                font-size: 1em; /* Fixed font size for desktop */
             }
         }
     </style>
@@ -287,5 +324,4 @@
 
 </body>
 </html>
-
 
