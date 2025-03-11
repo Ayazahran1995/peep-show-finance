@@ -41,7 +41,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('Hide & Seek Time!.png');
+            background-image: url('Hide & Seek Time!.png'); /* Replace with stock market background */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -115,6 +115,20 @@
             backdrop-filter: blur(8px);
         }
 
+        #progress {
+            font-family: 'Neue Machina Light', sans-serif;
+            font-size: 1em;
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        #achievements {
+            font-family: 'Neue Machina Light', sans-serif;
+            font-size: 1em;
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -139,6 +153,14 @@
 
     <div id="doom-counter">
         Doom Level: <span id="doom-count">0</span> - <span id="doom-message">Welcome to Despair.</span>
+    </div>
+
+    <div id="progress">
+        Seen <span id="seen-count">0</span>/<span id="total-terms">12</span> terms. Keep going!
+    </div>
+
+    <div id="achievements">
+        Achievements: <span id="achievement-list">None yet. Keep clicking.</span>
     </div>
 
     <div class="cta-buttons">
@@ -187,22 +209,39 @@
             "Doom Level: Maximum Despair Achieved. Congratulations?"
         ];
 
-        let currentTermIndex = 0;
+        const achievements = [
+            { name: "Doom Novice", description: "Seen 3 terms. Welcome to despair.", threshold: 3 },
+            { name: "Master of Despair", description: "Seen all terms. You’re officially miserable.", threshold: financeTerms.length },
+            { name: "Financial Masochist", description: "Seen all terms twice. Why are you like this?", threshold: financeTerms.length * 2 }
+        ];
+
+        let termsQueue = [...financeTerms]; // Create a copy of the terms array
         let doomCount = 0;
+        let seenCount = 0;
+        let unlockedAchievements = [];
 
         function generateTerm() {
-            currentTermIndex = Math.floor(Math.random() * financeTerms.length);
+            if (termsQueue.length === 0) {
+                termsQueue = [...financeTerms]; // Reset the queue if empty
+                doomCount = 0; // Reset the doom counter
+            }
+
+            const randomIndex = Math.floor(Math.random() * termsQueue.length);
+            const termData = termsQueue.splice(randomIndex, 1)[0]; // Remove the term from the queue
+
             const container = document.getElementById('term-container');
             container.style.animation = 'none';
             void container.offsetWidth;
             container.style.animation = 'fadeIn 0.8s ease';
 
-            const term = financeTerms[currentTermIndex].term;
-            document.getElementById("term").textContent = term;
-            document.getElementById("explanation").textContent = financeTerms[currentTermIndex].explanation;
-            document.getElementById("scenario").textContent = scenarios[term] || "*Your life is a series of poor decisions.*";
+            document.getElementById("term").textContent = termData.term;
+            document.getElementById("explanation").textContent = termData.explanation;
+            document.getElementById("scenario").textContent = scenarios[termData.term] || "*Your life is a series of poor decisions.*";
 
+            seenCount++;
             updateDoomCounter();
+            updateProgress();
+            checkAchievements();
         }
 
         function updateDoomCounter() {
@@ -212,6 +251,34 @@
 
             doomCountElement.textContent = doomCount;
             doomMessageElement.textContent = doomMessages[Math.min(doomCount, doomMessages.length - 1)];
+        }
+
+        function updateProgress() {
+            document.getElementById("seen-count").textContent = seenCount;
+            document.getElementById("total-terms").textContent = financeTerms.length;
+        }
+
+        function checkAchievements() {
+            const newAchievements = achievements.filter(
+                a => seenCount >= a.threshold && !unlockedAchievements.includes(a.name)
+            );
+
+            if (newAchievements.length > 0) {
+                newAchievements.forEach(a => {
+                    unlockedAchievements.push(a.name);
+                    alert(`Achievement Unlocked: ${a.name}\n${a.description}`);
+                });
+                updateAchievementList();
+            }
+        }
+
+        function updateAchievementList() {
+            const achievementListElement = document.getElementById('achievement-list');
+            if (unlockedAchievements.length === 0) {
+                achievementListElement.textContent = "None yet. Keep clicking.";
+            } else {
+                achievementListElement.textContent = unlockedAchievements.join(", ");
+            }
         }
 
         // Load first term on page load
