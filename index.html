@@ -83,6 +83,15 @@
             font-style: italic;
         }
 
+        .hope {
+            font-family: 'Neue Machina Light', sans-serif;
+            font-size: 3.5vw; /* Responsive font size */
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 15px;
+            font-style: italic;
+            color: #a8e6cf; /* Light green for hope */
+        }
+
         .cta-buttons {
             margin-top: 20px;
             display: flex;
@@ -156,7 +165,7 @@
                 font-size: 1.4em; /* Fixed font size for desktop */
             }
 
-            .scenario {
+            .scenario, .hope {
                 font-size: 1.2em; /* Fixed font size for desktop */
             }
 
@@ -180,12 +189,13 @@
 </head>
 <body>
 
-    <h1>🟦 Finance Explained, But With More Despair.</h1>
+    <h1>Finance Explained, But With More Despair.</h1>
 
     <div class="term-container" id="term-container">
         <div class="term" id="term">Loading misery...</div>
         <div class="explanation" id="explanation">Please hold. Doom is buffering.</div>
         <div class="scenario" id="scenario">*Awkward scenario loading...*</div>
+        <div class="hope" id="hope">*Glimmer of hope loading...*</div>
     </div>
 
     <div id="doom-counter">
@@ -206,18 +216,66 @@
 
     <script>
         const financeTerms = [
-            { term: "Overdraft", explanation: "An overdraft is your bank saying, ‘Go on then, have some money you don’t have.’ But the catch is, it’s actually their money, and they’ll want it back. With interest. And disappointment." },
-            { term: "Credit Score", explanation: "Your credit score is basically a trust rating given to you by an algorithm that decided, years ago, that you were financially irresponsible. And it's never forgiven you." },
-            { term: "Savings Account", explanation: "A savings account is a magical place where you put your money so the bank can use it, while giving you just enough interest to afford half a Tesco meal deal after a decade." },
-            { term: "Investing", explanation: "Investing is gambling, but if you do it in a suit, it’s called ‘financial planning.’ The stock market is basically a mood ring for rich people." },
-            { term: "Crypto", explanation: "Crypto is digital magic beans. Sometimes they make you rich, sometimes they make you cry, and usually, they do both in the same week." },
-            { term: "Inflation", explanation: "Inflation is when everything costs more, but your salary stays the same. It’s like trying to run up an escalator that’s going down. And it's on fire." },
-            { term: "NFTs", explanation: "NFTs are like buying an expensive painting, except there’s no painting. Just the ‘vibes’ of a painting. Oh, and your vibes are now worth 3p." },
-            { term: "Buy Now, Pay Later (BNPL)", explanation: "Buy Now, Pay Later is basically Future You’s problem. Except Future You is already drowning in bad financial decisions. Cheers, mate." },
-            { term: "Pension", explanation: "A pension is a slow-motion heist where you spend decades trying to save enough money to retire, but by the time you do, they’ve moved the goalposts to ‘work until you drop.’" },
-            { term: "Mortgage", explanation: "A mortgage is a 25-year deal where you rent from the bank, except instead of a landlord, you have an interest rate that judges you." },
-            { term: "Hedge Funds", explanation: "A hedge fund is just a way for rich people to gamble using money that isn't theirs, and when they lose, the government buys them a new yacht." },
-            { term: "Recession", explanation: "A recession is when the economy has a panic attack and suddenly everyone pretends they didn’t see it coming. Again." }
+            { 
+                term: "Overdraft", 
+                explanation: "An overdraft is your bank saying, ‘Go on then, have some money you don’t have.’ But the catch is, it’s actually their money, and they’ll want it back. With interest. And disappointment.",
+                hope: "But hey, overdrafts are a wake-up call to budget better. You’ve got this!"
+            },
+            { 
+                term: "Credit Score", 
+                explanation: "Your credit score is basically a trust rating given to you by an algorithm that decided, years ago, that you were financially irresponsible. And it's never forgiven you.",
+                hope: "The good news? Credit scores can improve over time. Start small, and you’ll get there."
+            },
+            { 
+                term: "Savings Account", 
+                explanation: "A savings account is a magical place where you put your money so the bank can use it, while giving you just enough interest to afford half a Tesco meal deal after a decade.",
+                hope: "Even small savings add up over time. Start today, and watch your money grow!"
+            },
+            { 
+                term: "Investing", 
+                explanation: "Investing is gambling, but if you do it in a suit, it’s called ‘financial planning.’ The stock market is basically a mood ring for rich people.",
+                hope: "Investing is a long-term game. Stay patient, and you’ll see the rewards."
+            },
+            { 
+                term: "Crypto", 
+                explanation: "Crypto is digital magic beans. Sometimes they make you rich, sometimes they make you cry, and usually, they do both in the same week.",
+                hope: "Crypto is volatile, but it’s also a chance to learn about new tech. Knowledge is power!"
+            },
+            { 
+                term: "Inflation", 
+                explanation: "Inflation is when everything costs more, but your salary stays the same. It’s like trying to run up an escalator that’s going down. And it's on fire.",
+                hope: "Inflation won’t last forever. Focus on what you can control, like budgeting and saving."
+            },
+            { 
+                term: "NFTs", 
+                explanation: "NFTs are like buying an expensive painting, except there’s no painting. Just the ‘vibes’ of a painting. Oh, and your vibes are now worth 3p.",
+                hope: "NFTs might be risky, but they’re also a chance to explore creativity and innovation."
+            },
+            { 
+                term: "Buy Now, Pay Later (BNPL)", 
+                explanation: "Buy Now, Pay Later is basically Future You’s problem. Except Future You is already drowning in bad financial decisions. Cheers, mate.",
+                hope: "BNPL can be managed with a solid plan. Pay off what you can, and avoid future debt."
+            },
+            { 
+                term: "Pension", 
+                explanation: "A pension is a slow-motion heist where you spend decades trying to save enough money to retire, but by the time you do, they’ve moved the goalposts to ‘work until you drop.’",
+                hope: "It’s never too late to start saving. Even small contributions add up over time."
+            },
+            { 
+                term: "Mortgage", 
+                explanation: "A mortgage is a 25-year deal where you rent from the bank, except instead of a landlord, you have an interest rate that judges you.",
+                hope: "Owning a home is a big achievement. Celebrate the milestones along the way!"
+            },
+            { 
+                term: "Hedge Funds", 
+                explanation: "A hedge fund is just a way for rich people to gamble using money that isn't theirs, and when they lose, the government buys them a new yacht.",
+                hope: "Hedge funds are complex, but understanding them can make you a smarter investor."
+            },
+            { 
+                term: "Recession", 
+                explanation: "A recession is when the economy has a panic attack and suddenly everyone pretends they didn’t see it coming. Again.",
+                hope: "Recessions don’t last forever. Use this time to build skills and save where you can."
+            }
         ];
 
         const scenarios = {
@@ -274,6 +332,7 @@
             document.getElementById("term").textContent = termData.term;
             document.getElementById("explanation").textContent = termData.explanation;
             document.getElementById("scenario").textContent = scenarios[termData.term] || "*Your life is a series of poor decisions.*";
+            document.getElementById("hope").textContent = termData.hope || "*Glimmer of hope loading...*";
 
             seenCount++;
             updateDoomCounter();
@@ -287,40 +346,7 @@
             const doomMessageElement = document.getElementById('doom-message');
 
             doomCountElement.textContent = doomCount;
-            doomMessageElement.textContent = doomMessages[Math.min(doomCount, doomMessages.length - 1)];
-        }
-
-        function updateProgress() {
-            document.getElementById("seen-count").textContent = seenCount;
-            document.getElementById("total-terms").textContent = financeTerms.length;
-        }
-
-        function checkAchievements() {
-            const newAchievements = achievements.filter(
-                a => seenCount >= a.threshold && !unlockedAchievements.includes(a.name)
-            );
-
-            if (newAchievements.length > 0) {
-                newAchievements.forEach(a => {
-                    unlockedAchievements.push(a.name);
-                    alert(`Achievement Unlocked: ${a.name}\n${a.description}`);
-                });
-                updateAchievementList();
-            }
-        }
-
-        function updateAchievementList() {
-            const achievementListElement = document.getElementById('achievement-list');
-            if (unlockedAchievements.length === 0) {
-                achievementListElement.textContent = "None yet. Keep clicking.";
-            } else {
-                achievementListElement.textContent = unlockedAchievements.join(", ");
-            }
-        }
-
-        // Load first term on page load
-        generateTerm();
-    </script>
+            doomMessageElement.textContent =
 
 </body>
 </html>
