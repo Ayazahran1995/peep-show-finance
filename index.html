@@ -33,6 +33,7 @@
             position: relative;
         }
 
+        /* PNG as full-screen background */
         body::before {
             content: '';
             position: absolute;
@@ -40,7 +41,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('Hide & Seek Time! (1).png');
+            background-image: url('Hide & Seek Time! (1).png'); /* Replace with stock market background */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -48,13 +49,13 @@
         }
 
         h1 {
-            font-size: 8vw;
+            font-size: 8vw; /* Responsive font size */
             margin-bottom: 20px;
         }
 
         .term-container {
             padding: 20px;
-            max-width: 90%;
+            max-width: 90%; /* Adjust for smaller screens */
             margin: 20px;
             background: rgba(0, 0, 0, 0.5);
             border-radius: 20px;
@@ -62,151 +63,265 @@
             animation: fadeIn 0.8s ease;
         }
 
-        .term, .explanation, .scenario, .hope {
+        .term {
+            font-size: 6vw; /* Responsive font size */
+            font-weight: bold;
             margin-bottom: 15px;
         }
 
-        .term { font-size: 6vw; font-weight: bold; }
-        .explanation { font-family: 'Neue Machina Light'; font-size: 4vw; line-height: 1.5; }
-        .scenario, .hope { font-family: 'Neue Machina Light'; font-size: 3.5vw; font-style: italic; }
-        .hope { color: #a8e6cf; }
+        .explanation {
+            font-family: 'Neue Machina Light', sans-serif;
+            font-size: 4vw; /* Responsive font size */
+            line-height: 1.5;
+        }
+
+        .scenario {
+            font-family: 'Neue Machina Light', sans-serif;
+            font-size: 3.5vw; /* Responsive font size */
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 15px;
+            font-style: italic;
+        }
 
         .cta-buttons {
             margin-top: 20px;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            flex-direction: column; /* Stack buttons vertically on mobile */
+            gap: 10px; /* Space between buttons */
         }
 
         .cta-buttons button {
-            background: #ff6f61;
-            border: none;
+            background: transparent;
+            border: 2px solid white;
             color: white;
             padding: 15px 25px;
             border-radius: 50px;
-            font-size: 4vw;
             cursor: pointer;
+            font-size: 4vw; /* Responsive font size */
             transition: all 0.3s ease;
         }
 
-        .cta-buttons button:hover { background: #ff3b2f; }
+        .cta-buttons button:hover {
+            background: white;
+            color: black;
+        }
 
-        #doom-counter, #progress, #achievements {
+        #doom-counter {
+            font-family: 'Neue Machina', sans-serif;
+            font-size: 4vw; /* Responsive font size */
+            margin-top: 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(8px);
+        }
+
+        #progress {
+            font-family: 'Neue Machina Light', sans-serif;
+            font-size: 3.5vw; /* Responsive font size */
             margin-top: 10px;
-            font-family: 'Neue Machina Light';
-            font-size: 3.5vw;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        #achievements {
+            font-family: 'Neue Machina Light', sans-serif;
+            font-size: 3.5vw; /* Responsive font size */
+            margin-top: 10px;
             color: rgba(255, 255, 255, 0.8);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
+        /* Media query for larger screens */
         @media (min-width: 600px) {
-            h1 { font-size: 3em; }
-            .term { font-size: 2.5em; }
-            .explanation { font-size: 1.4em; }
-            .scenario, .hope, .cta-buttons button, #doom-counter { font-size: 1.2em; }
+            h1 {
+                font-size: 3em; /* Fixed font size for desktop */
+            }
+
+            .term {
+                font-size: 2.5em; /* Fixed font size for desktop */
+            }
+
+            .explanation {
+                font-size: 1.4em; /* Fixed font size for desktop */
+            }
+
+            .scenario {
+                font-size: 1.2em; /* Fixed font size for desktop */
+            }
+
+            .cta-buttons {
+                flex-direction: row; /* Buttons side by side on desktop */
+            }
+
+            .cta-buttons button {
+                font-size: 1em; /* Fixed font size for desktop */
+            }
+
+            #doom-counter {
+                font-size: 1.2em; /* Fixed font size for desktop */
+            }
+
+            #progress, #achievements {
+                font-size: 1em; /* Fixed font size for desktop */
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>💸 Finance Explained, But With More Despair.</h1>
+    <h1> 💸 Finance Explained, But With More Despair.</h1>
 
     <div class="term-container" id="term-container">
         <div class="term" id="term">Loading misery...</div>
         <div class="explanation" id="explanation">Please hold. Doom is buffering.</div>
         <div class="scenario" id="scenario">*Awkward scenario loading...*</div>
-        <div class="hope" id="hope">*Glimmer of hope loading...*</div>
     </div>
 
-    <div id="doom-counter">Doom Level: <span id="doom-count">0</span> - <span id="doom-message">Welcome to Despair.</span></div>
-    <div id="progress">Seen <span id="seen-count">0</span>/<span id="total-terms">12</span> terms. Keep going!</div>
-    <div id="achievements">Achievements: <span id="achievement-list">None yet. Keep clicking.</span></div>
+    <div id="doom-counter">
+        Doom Level: <span id="doom-count">0</span> - <span id="doom-message">Welcome to Despair.</span>
+    </div>
+
+    <div id="progress">
+        Seen <span id="seen-count">0</span>/<span id="total-terms">12</span> terms. Keep going!
+    </div>
+
+    <div id="achievements">
+        Achievements: <span id="achievement-list">None yet. Keep clicking.</span>
+    </div>
 
     <div class="cta-buttons">
         <button onclick="generateTerm()">Make It Worse</button>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const financeTerms = [...]; // Use your full array of terms here (as in the code you shared)
-            const scenarios = {...}; // Use your full scenarios object here
-            const doomMessages = [
-                "Welcome to Despair. It only gets worse from here.",
-                "Mild Doom: Like a drizzle of regret.",
-                "Moderate Doom: You’re getting the hang of this.",
-                "High Doom: Like a slow-motion car crash.",
-                "Severe Doom: You’re in deep now.",
-                "Catastrophic Doom: Why do you keep clicking?",
-                "Apocalyptic Doom: Peak despair achieved.",
-                "Maximum Doom: Congratulations?"
-            ];
-            const achievements = [
-                { name: "Doom Novice", description: "Seen 3 terms. Welcome to despair.", threshold: 3 },
-                { name: "Master of Despair", description: "Seen all terms. You’re officially miserable.", threshold: financeTerms.length },
-                { name: "Financial Masochist", description: "Seen all terms twice. Why are you like this?", threshold: financeTerms.length * 2 }
-            ];
+        const financeTerms = [
+            { term: "Overdraft", explanation: "An overdraft is your bank saying, ‘Go on then, have some money you don’t have.’ But the catch is, it’s actually their money, and they’ll want it back. With interest. And disappointment." },
+            { term: "Credit Score", explanation: "Your credit score is basically a trust rating given to you by an algorithm that decided, years ago, that you were financially irresponsible. And it's never forgiven you." },
+            { term: "Savings Account", explanation: "A savings account is a magical place where you put your money so the bank can use it, while giving you just enough interest to afford half a Tesco meal deal after a decade." },
+            { term: "Investing", explanation: "Investing is gambling, but if you do it in a suit, it’s called ‘financial planning.’ The stock market is basically a mood ring for rich people." },
+            { term: "Crypto", explanation: "Crypto is digital magic beans. Sometimes they make you rich, sometimes they make you cry, and usually, they do both in the same week." },
+            { term: "Inflation", explanation: "Inflation is when everything costs more, but your salary stays the same. It’s like trying to run up an escalator that’s going down. And it's on fire." },
+            { term: "NFTs", explanation: "NFTs are like buying an expensive painting, except there’s no painting. Just the ‘vibes’ of a painting. Oh, and your vibes are now worth 3p." },
+            { term: "Buy Now, Pay Later (BNPL)", explanation: "Buy Now, Pay Later is basically Future You’s problem. Except Future You is already drowning in bad financial decisions. Cheers, mate." },
+            { term: "Pension", explanation: "A pension is a slow-motion heist where you spend decades trying to save enough money to retire, but by the time you do, they’ve moved the goalposts to ‘work until you drop.’" },
+            { term: "Mortgage", explanation: "A mortgage is a 25-year deal where you rent from the bank, except instead of a landlord, you have an interest rate that judges you." },
+            { term: "Hedge Funds", explanation: "A hedge fund is just a way for rich people to gamble using money that isn't theirs, and when they lose, the government buys them a new yacht." },
+            { term: "Recession", explanation: "A recession is when the economy has a panic attack and suddenly everyone pretends they didn’t see it coming. Again." }
+        ];
 
-            let seenTerms = new Set();
-            let doomCount = 0;
-            let unlockedAchievements = [];
+        const scenarios = {
+            "Overdraft": "You check your balance and see you’re £50 overdrawn. You call the bank, and they say, ‘Just pay us back with interest.’ You sigh, eat beans from the can, and remind yourself — this is temporary. You’ll get back on top.",
+            "Credit Score": "You apply for a credit card and get rejected. The letter says, ‘We regret to inform you.’ You regret everything — but then you start looking up ways to rebuild. Because there’s always a way forward.",
+            "Savings Account": "You check your savings account after a year and see 12p in interest. You laugh, but also remind yourself — small steps are still steps. You’re building something, even if it’s slow.",
+            "Investing": "You invest in a stock that seemed like a sure thing. It drops 80% in a week. You sit with the shock for a moment, but remind yourself — everyone starts somewhere. Learning curves are real, and you’ll make wiser choices next time.’",
+            "Crypto": "You buy £100 of Dogecoin after seeing it online. A week later, it’s worth £12. You take a deep breath and remind yourself: you’re learning, and every lesson has value — even the expensive ones.",
+            "Inflation": "You go to the supermarket and see bread costs £5. You pause, overwhelmed — but then you think, 'Okay, time to get creative.' You swap brands, try new recipes. You’re adapting — and that’s powerful.",
+            "NFTs": "You spend £500 on an NFT. A week later, it’s worth £3. You wonder what you were thinking, but also — now you know. Everyone makes mistakes with money. You’ll make better ones next time",
+            "Buy Now, Pay Later (BNPL)": "You buy a TV on BNPL. A month later, you're eating noodles for every meal. You smile to yourself — because now you know the cost of 'buy now.' And next time, you'll be ready.",
+            "Pension": "You check your pension and it says you’ll retire at 85. You laugh, but also think — it’s not too late to start. Small steps today can make a big difference later. You’ve got time."",
+            "Mortgage": "You finally get a mortgage after years of saving. The bank says, ‘Congratulations, you’re now in debt for the next 25 years.’ You celebrate by crying into a cup of instant coffee.",
+            "Hedge Funds": "You read about hedge funds in the news. They lost billions. The government bailed them out. You lost £20 on a bad bet. No one bailed you out , But you're a tough cookie, and bouncing back is what you do.",
+            "Recession": "The recession hits. Your mate says, ‘At least you’ve got your health!’ You laugh it off — because yeah, it’s rough, but you’re tougher."
+        };
 
-            function generateTerm() {
-                const unseenTerms = financeTerms.filter(t => !seenTerms.has(t.term));
-                let termData = unseenTerms.length ? unseenTerms[Math.floor(Math.random() * unseenTerms.length)] : financeTerms[Math.floor(Math.random() * financeTerms.length)];
-                
-                seenTerms.add(termData.term);
-                doomCount++;
-                updateDOM(termData);
-                updateDoomCounter();
-                updateProgress();
-                checkAchievements();
+        const doomMessages = [
+            "Welcome to Despair. It only gets worse from here.",
+            "Doom Level: Mild. Like a drizzle of regret.",
+            "Doom Level: Moderate. You’re getting the hang of this. Unfortunately.",
+            "Doom Level: High. Like a slow-motion car crash.",
+            "Doom Level: Severe. You’re in too deep now.",
+            "Doom Level: Catastrophic. Why do you keep clicking?",
+            "Doom Level: Apocalyptic. You’ve reached peak despair.",
+            "Doom Level: Maximum Despair Achieved. Congratulations?"
+        ];
+
+        const achievements = [
+            { name: "Doom Novice", description: "Seen 3 terms. Welcome to despair.", threshold: 3 },
+            { name: "Master of Despair", description: "Seen all terms. You’re officially miserable.", threshold: financeTerms.length },
+            { name: "Financial Masochist", description: "Seen all terms twice. Why are you like this?", threshold: financeTerms.length * 2 }
+        ];
+
+        let termsQueue = [...financeTerms]; // Create a copy of the terms array
+        let doomCount = 0;
+        let seenCount = 0;
+        let unlockedAchievements = [];
+
+        function generateTerm() {
+            if (termsQueue.length === 0) {
+                termsQueue = [...financeTerms]; // Reset the queue if empty
+                doomCount = 0; // Reset the doom counter
             }
 
-            function updateDOM(termData) {
-                const container = document.getElementById('term-container');
-                container.style.animation = 'none';
-                void container.offsetWidth;
-                container.style.animation = 'fadeIn 0.8s ease';
+            const randomIndex = Math.floor(Math.random() * termsQueue.length);
+            const termData = termsQueue.splice(randomIndex, 1)[0]; // Remove the term from the queue
 
-                document.getElementById("term").textContent = termData.term;
-                document.getElementById("explanation").textContent = termData.explanation;
-                document.getElementById("scenario").textContent = scenarios[termData.term] || "*Your life is a series of poor decisions.*";
-                document.getElementById("hope").textContent = termData.hope || "*Glimmer of hope loading...*";
-            }
+            const container = document.getElementById('term-container');
+            container.style.animation = 'none';
+            void container.offsetWidth;
+            container.style.animation = 'fadeIn 0.8s ease';
 
-            function updateDoomCounter() {
-                document.getElementById('doom-count').textContent = doomCount;
-                document.getElementById('doom-message').textContent = doomMessages[Math.min(doomCount, doomMessages.length - 1)];
-            }
+            document.getElementById("term").textContent = termData.term;
+            document.getElementById("explanation").textContent = termData.explanation;
+            document.getElementById("scenario").textContent = scenarios[termData.term] || "*Your life is a series of poor decisions.*";
 
-            function updateProgress() {
-                document.getElementById("seen-count").textContent = seenTerms.size;
-                document.getElementById("total-terms").textContent = financeTerms.length;
-            }
+            seenCount++;
+            updateDoomCounter();
+            updateProgress();
+            checkAchievements();
+        }
 
-            function checkAchievements() {
-                achievements.forEach(a => {
-                    if (seenTerms.size >= a.threshold && !unlockedAchievements.includes(a.name)) {
-                        unlockedAchievements.push(a.name);
-                        alert(`Achievement Unlocked: ${a.name}\n${a.description}`);
-                        updateAchievementList();
-                    }
+        function updateDoomCounter() {
+            doomCount++;
+            const doomCountElement = document.getElementById('doom-count');
+            const doomMessageElement = document.getElementById('doom-message');
+
+            doomCountElement.textContent = doomCount;
+            doomMessageElement.textContent = doomMessages[Math.min(doomCount, doomMessages.length - 1)];
+        }
+
+        function updateProgress() {
+            document.getElementById("seen-count").textContent = seenCount;
+            document.getElementById("total-terms").textContent = financeTerms.length;
+        }
+
+        function checkAchievements() {
+            const newAchievements = achievements.filter(
+                a => seenCount >= a.threshold && !unlockedAchievements.includes(a.name)
+            );
+
+            if (newAchievements.length > 0) {
+                newAchievements.forEach(a => {
+                    unlockedAchievements.push(a.name);
+                    alert(`Achievement Unlocked: ${a.name}\n${a.description}`);
                 });
+                updateAchievementList();
             }
+        }
 
-            function updateAchievementList() {
-                const list = unlockedAchievements.length ? unlockedAchievements.join(", ") : "None yet. Keep clicking.";
-                document.getElementById('achievement-list').textContent = list;
+        function updateAchievementList() {
+            const achievementListElement = document.getElementById('achievement-list');
+            if (unlockedAchievements.length === 0) {
+                achievementListElement.textContent = "None yet. Keep clicking.";
+            } else {
+                achievementListElement.textContent = unlockedAchievements.join(", ");
             }
+        }
 
-            // Load first term
-            generateTerm();
-        });
+        // Load first term on page load
+        generateTerm();
     </script>
+
 </body>
 </html>
 
