@@ -62,13 +62,10 @@
         .explanation { font-family: 'Neue Machina Light'; font-size: 4vw; line-height: 1.5; }
         .scenario { font-family: 'Neue Machina Light'; font-size: 3.5vw; color: rgba(255, 255, 255, 0.8); margin-top: 15px; font-style: italic; }
 
-        .term-image {
-            width: 50px; /* Adjust size for small icons */
-            height: 50px; /* Adjust size for small icons */
-            position: absolute; /* Position the icon */
-            top: 10px; /* Adjust top position */
-            right: 10px; /* Adjust right position */
-            border-radius: 50%; /* Optional: Make it circular */
+        .term-emoji {
+            font-size: 10vw; /* Large emoji size */
+            margin-bottom: 15px;
+            animation: bounce 2s infinite; /* Bounce animation */
         }
 
         .cta-buttons { margin-top: 20px; }
@@ -98,13 +95,18 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
         @media (min-width: 600px) {
             h1 { font-size: 3em; }
             .term { font-size: 2.5em; }
             .explanation { font-size: 1.4em; }
             .scenario { font-size: 1.2em; }
             .cta-buttons button { font-size: 1em; }
-            .term-image { width: 60px; height: 60px; } /* Adjust icon size for larger screens */
+            .term-emoji { font-size: 5em; } /* Adjust emoji size for larger screens */
         }
     </style>
 </head>
@@ -113,10 +115,10 @@
 <h1>💸 Finance Explained, But With More Despair</h1>
 
 <div class="term-container" id="term-container">
+    <div class="term-emoji" id="term-emoji">💸</div> <!-- Emoji placeholder -->
     <div class="term" id="term">Loading misery...</div>
     <div class="explanation" id="explanation">Please hold. Doom is buffering.</div>
     <div class="scenario" id="scenario">*Awkward scenario loading...*</div>
-    <img id="term-image" class="term-image" src="" alt="Term Icon" style="display: none;"> <!-- Icon placeholder -->
 </div>
 
 <div id="doom-counter">Doom Level: <span id="doom-count">0</span> - <span id="doom-message">Welcome to Despair.</span></div>
@@ -132,64 +134,64 @@
         { 
             term: "Overdraft", 
             explanation: "An overdraft is your bank saying, ‘Go on then, have some money you don’t have.’ But the catch is, it’s actually their money, and they’ll want it back. With interest. And disappointment.",
-            image: "overdraft-icon.png" // Add icon path
+            emoji: "💸" // Emoji for Overdraft
         },
         { 
             term: "Credit Score", 
             explanation: "Your credit score is basically a trust rating given to you by an algorithm that decided, years ago, that you were financially irresponsible. And it's never forgiven you.",
-            image: "credit-score-icon.png" // Add icon path
+            emoji: "📉" // Emoji for Credit Score
         },
         { 
             term: "Savings Account", 
             explanation: "A savings account is a magical place where you put your money so the bank can use it, while giving you just enough interest to afford half a Tesco meal deal after a decade.",
-            image: "savings-account-icon.png" // Add icon path
+            emoji: "💰" // Emoji for Savings Account
         },
         { 
             term: "Investing", 
             explanation: "Investing is making confident guesses with your money — but when you wear a suit, it’s called ‘financial planning.’",
-            image: "investing-icon.png" // Add icon path
+            emoji: "📈" // Emoji for Investing
         },
         { 
             term: "Crypto", 
             explanation: "Crypto is like digital magic beans. Sometimes they make you rich, sometimes they make you cry, and usually, they do both in the same week.",
-            image: "crypto-icon.png" // Add icon path
+            emoji: "🪙" // Emoji for Crypto
         },
         { 
             term: "Inflation", 
             explanation: "Inflation is when everything costs more, but your salary stays the same. It’s like trying to run up an escalator that’s going down. And it's on fire.",
-            image: "inflation-icon.png" // Add icon path
+            emoji: "🔥" // Emoji for Inflation
         },
         { 
             term: "NFTs", 
             explanation: "NFTs are like buying an expensive painting, except there’s no painting. Just the ‘vibes’ of a painting. Oh, and your vibes are now worth 3p.",
-            image: "nfts-icon.png" // Add icon path
+            emoji: "🖼️" // Emoji for NFTs
         },
         { 
             term: "Buy Now, Pay Later (BNPL)", 
             explanation: "Buy Now, Pay Later is basically Future You’s problem. Except Future You is already drowning in bad financial decisions. Cheers, mate.",
-            image: "bnpl-icon.png" // Add icon path
+            emoji: "💳" // Emoji for BNPL
         },
         { 
             term: "Pension", 
             explanation: "A pension is a slow-motion heist where you spend decades trying to save enough money to retire, but by the time you do, they’ve moved the goalposts to ‘work until you drop.’",
-            image: "pension-icon.png" // Add icon path
+            emoji: "👴" // Emoji for Pension
         },
         { 
             term: "Mortgage", 
             explanation: "A mortgage is a 25-year deal where you rent from the bank, except instead of a landlord, you have an interest rate that judges you.",
-            image: "mortgage-icon.png" // Add icon path
+            emoji: "🏠" // Emoji for Mortgage
         },
         { 
             term: "Venture Capital", 
             explanation: "Unicorns might be fictional, but in VC, the odds of finding one are slim, never zero. VC is placing 100 bets, knowing 90 will fail spectacularly, but the 10 that win might just buy them an island. One big win makes all the losses worth it.",
-            image: "venture-capital-icon.png" // Add icon path
+            emoji: "🦄" // Emoji for Venture Capital
         },
         { 
             term: "Recession", 
             explanation: "A recession is when the economy has a panic attack and suddenly everyone pretends they didn’t see it coming. Again.",
-            image: "recession-icon.png" // Add icon path
+            emoji: "📉" // Emoji for Recession
         }
-    ]; // Your full finance terms array with icons
+    ]; // Your full finance terms array with emojis
 
     const scenarios = {
         "Overdraft": "You check your balance and see you're £50 overdrawn. You call the bank, and they say, 'Just pay us back with interest.' You sigh, eat beans from the can, and remind yourself — this is temporary. You'll get back on top.",
@@ -241,14 +243,9 @@
         document.getElementById("explanation").textContent = termData.explanation;
         document.getElementById("scenario").textContent = scenarios[termData.term] || "No scenario found, but life is still tough.";
 
-        // Display the icon for the term
-        const termImage = document.getElementById("term-image");
-        if (termData.image) {
-            termImage.src = termData.image;
-            termImage.style.display = "block"; // Show the icon
-        } else {
-            termImage.style.display = "none"; // Hide the icon if none is provided
-        }
+        // Display the emoji for the term
+        const termEmoji = document.getElementById("term-emoji");
+        termEmoji.textContent = termData.emoji;
 
         // Trigger fade-in
         const container = document.getElementById("term-container");
