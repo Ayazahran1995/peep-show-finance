@@ -11,8 +11,8 @@
         }
 
         @font-face {
-            font-family: 'Neue Machina Light';
-            src: url('PPNeueMachina-Light.otf') format('opentype');
+            font-family: 'Neue Machina Bold';
+            src: url('PPNeueMachina-Bold.otf') format('opentype');
         }
 
         body {
@@ -38,14 +38,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('Hide & Seek Time! (1).png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background: linear-gradient(90deg, #000000, #3533cd); /* Linear gradient at 90 degrees */
             z-index: -1;
         }
 
-        h1 { font-size: 8vw; margin-bottom: 20px; }
+        h1 {
+            font-size: 8vw;
+            margin-bottom: 20px;
+        }
 
         .term-container {
             padding: 20px;
@@ -55,11 +55,21 @@
             border-radius: 20px;
             backdrop-filter: blur(10px);
             animation: fadeIn 0.8s ease;
+            position: relative;
         }
 
         .term { font-size: 6vw; font-weight: bold; margin-bottom: 15px; }
         .explanation { font-family: 'Neue Machina Light'; font-size: 4vw; line-height: 1.5; }
         .scenario { font-family: 'Neue Machina Light'; font-size: 3.5vw; color: rgba(255, 255, 255, 0.8); margin-top: 15px; font-style: italic; }
+
+        .term-image {
+            width: 50px; /* Adjust size for small icons */
+            height: 50px; /* Adjust size for small icons */
+            position: absolute; /* Position the icon */
+            top: 10px; /* Adjust top position */
+            right: 10px; /* Adjust right position */
+            border-radius: 50%; /* Optional: Make it circular */
+        }
 
         .cta-buttons { margin-top: 20px; }
         .cta-buttons button {
@@ -94,17 +104,19 @@
             .explanation { font-size: 1.4em; }
             .scenario { font-size: 1.2em; }
             .cta-buttons button { font-size: 1em; }
+            .term-image { width: 60px; height: 60px; } /* Adjust icon size for larger screens */
         }
     </style>
 </head>
 <body>
 
-<h1>💸 Finance Explained, But With More Despair.</h1>
+<h1>💸 Finance Explained, But With More Despair</h1>
 
 <div class="term-container" id="term-container">
     <div class="term" id="term">Loading misery...</div>
     <div class="explanation" id="explanation">Please hold. Doom is buffering.</div>
     <div class="scenario" id="scenario">*Awkward scenario loading...*</div>
+    <img id="term-image" class="term-image" src="" alt="Term Icon" style="display: none;"> <!-- Icon placeholder -->
 </div>
 
 <div id="doom-counter">Doom Level: <span id="doom-count">0</span> - <span id="doom-message">Welcome to Despair.</span></div>
@@ -116,35 +128,83 @@
 </div>
 
 <script>
-    const financeTerms = [ { term: "Overdraft", explanation: "An overdraft is your bank saying, ‘Go on then, have some money you don’t have.’ But the catch is, it’s actually their money, and they’ll want it back. With interest. And disappointment." },
-            { term: "Credit Score", explanation: "Your credit score is basically a trust rating given to you by an algorithm that decided, years ago, that you were financially irresponsible. And it's never forgiven you." },
-            { term: "Savings Account", explanation: "A savings account is a magical place where you put your money so the bank can use it, while giving you just enough interest to afford half a Tesco meal deal after a decade." },
-            { term: "Investing", explanation: "Investing is making confident guesses with your money — but when you wear a suit, it’s called ‘financial planning.’" },
-            { term: "Crypto", explanation: "Crypto is like digital magic beans. Sometimes they make you rich, sometimes they make you cry, and usually, they do both in the same week." },
-            { term: "Inflation", explanation: "Inflation is when everything costs more, but your salary stays the same. It’s like trying to run up an escalator that’s going down. And it's on fire." },
-            { term: "NFTs", explanation: "NFTs are like buying an expensive painting, except there’s no painting. Just the ‘vibes’ of a painting. Oh, and your vibes are now worth 3p." },
-            { term: "Buy Now, Pay Later (BNPL)", explanation: "Buy Now, Pay Later is basically Future You’s problem. Except Future You is already drowning in bad financial decisions. Cheers, mate." },
-            { term: "Pension", explanation: "A pension is a slow-motion heist where you spend decades trying to save enough money to retire, but by the time you do, they’ve moved the goalposts to ‘work until you drop.’" },
-            { term: "Mortgage", explanation: "A mortgage is a 25-year deal where you rent from the bank, except instead of a landlord, you have an interest rate that judges you." },
-            { term: "Venture Capital", explanation: "Unicorns might be fictional, but in VC, the odds of finding one are slim, never zero. VC is placing 100 bets, knowing 90 will fail spectacularly, but the 10 that win might just buy them an island. because It’s all about asymmetric returns, one big win makes all the losses worth it." },
-            { term: "Recession", explanation: "A recession is when the economy has a panic attack and suddenly everyone pretends they didn’t see it coming. Again." }
-        ]; // Your full finance terms array (as in your version)
+    const financeTerms = [
+        { 
+            term: "Overdraft", 
+            explanation: "An overdraft is your bank saying, ‘Go on then, have some money you don’t have.’ But the catch is, it’s actually their money, and they’ll want it back. With interest. And disappointment.",
+            image: "overdraft-icon.png" // Add icon path
+        },
+        { 
+            term: "Credit Score", 
+            explanation: "Your credit score is basically a trust rating given to you by an algorithm that decided, years ago, that you were financially irresponsible. And it's never forgiven you.",
+            image: "credit-score-icon.png" // Add icon path
+        },
+        { 
+            term: "Savings Account", 
+            explanation: "A savings account is a magical place where you put your money so the bank can use it, while giving you just enough interest to afford half a Tesco meal deal after a decade.",
+            image: "savings-account-icon.png" // Add icon path
+        },
+        { 
+            term: "Investing", 
+            explanation: "Investing is making confident guesses with your money — but when you wear a suit, it’s called ‘financial planning.’",
+            image: "investing-icon.png" // Add icon path
+        },
+        { 
+            term: "Crypto", 
+            explanation: "Crypto is like digital magic beans. Sometimes they make you rich, sometimes they make you cry, and usually, they do both in the same week.",
+            image: "crypto-icon.png" // Add icon path
+        },
+        { 
+            term: "Inflation", 
+            explanation: "Inflation is when everything costs more, but your salary stays the same. It’s like trying to run up an escalator that’s going down. And it's on fire.",
+            image: "inflation-icon.png" // Add icon path
+        },
+        { 
+            term: "NFTs", 
+            explanation: "NFTs are like buying an expensive painting, except there’s no painting. Just the ‘vibes’ of a painting. Oh, and your vibes are now worth 3p.",
+            image: "nfts-icon.png" // Add icon path
+        },
+        { 
+            term: "Buy Now, Pay Later (BNPL)", 
+            explanation: "Buy Now, Pay Later is basically Future You’s problem. Except Future You is already drowning in bad financial decisions. Cheers, mate.",
+            image: "bnpl-icon.png" // Add icon path
+        },
+        { 
+            term: "Pension", 
+            explanation: "A pension is a slow-motion heist where you spend decades trying to save enough money to retire, but by the time you do, they’ve moved the goalposts to ‘work until you drop.’",
+            image: "pension-icon.png" // Add icon path
+        },
+        { 
+            term: "Mortgage", 
+            explanation: "A mortgage is a 25-year deal where you rent from the bank, except instead of a landlord, you have an interest rate that judges you.",
+            image: "mortgage-icon.png" // Add icon path
+        },
+        { 
+            term: "Venture Capital", 
+            explanation: "Unicorns might be fictional, but in VC, the odds of finding one are slim, never zero. VC is placing 100 bets, knowing 90 will fail spectacularly, but the 10 that win might just buy them an island. One big win makes all the losses worth it.",
+            image: "venture-capital-icon.png" // Add icon path
+        },
+        { 
+            term: "Recession", 
+            explanation: "A recession is when the economy has a panic attack and suddenly everyone pretends they didn’t see it coming. Again.",
+            image: "recession-icon.png" // Add icon path
+        }
+    ]; // Your full finance terms array with icons
 
-const scenarios = {
-    "Overdraft": "You check your balance and see you're £50 overdrawn. You call the bank, and they say, 'Just pay us back with interest.' You sigh, eat beans from the can, and remind yourself — this is temporary. You'll get back on top.",
-    "Credit Score": "You apply for a credit card and get rejected. The letter says, 'We regret to inform you.' You regret everything — but you start looking up ways to rebuild. There's always a way forward.",
-    "Savings Account": "You check your savings after a year and see 12p in interest. You laugh, but remind yourself — small steps are still steps.",
-    "Investing": "You invest in a ‘sure thing’ stock. It drops 80% in a week. You tell yourself it’s a ‘long-term investment’ — and honestly, it might be. Or at least a great story for future you, sipping wine but wiser.",
-    "Crypto": "You buy £100 of Dogecoin because Elon Musk tweeted about it. A week later, it’s worth £12. You tell yourself it’s a ‘long-term investment,’ but deep down, you know you’ve been scammed. Still, you’ve officially joined the 'I tried crypto' club. Badges pending.",
-    "Inflation": "You go to the shop and bread is £5. You pause, overwhelmed — but think, 'Time to get creative.' You adapt — and that's powerful.",
-    "NFTs": "You drop £500 on a rare Pepe NFT. A week later, it’s worth £3. Maybe next time, just get a meal from Pepe’s — at least that comes with fries. But hey, in the grand meme economy, every Pepe finds its moment. Yours just might be ahead.",
-    "Buy Now, Pay Later (BNPL)": "You buy a new TV with BNPL. A month later, you’re eating instant noodles for every meal. Future You is judging Present You hard, but Present You is watching Netflix in HD — and learning to budget better. Character development!",
-    "Pension": "You check your pension and it says you'll retire at 85. You laugh, but know it's not too late. Small steps matter.",
-    "Mortgage": "You finally get a mortgage. The bank says, 'Congrats, you're now in debt for 25 years.' You celebrate by crying with pride into instant coffee. Because you’ve worked hard for this, and you’ll handle what comes next.",
-    "Venture Capital": "You? You put £100 in a stock, and when it drops 20%, you stare at your screen like it’s a betrayal. Personal finance isn’t venture capital. You don’t get to lose 90% and still win. But maybe you’re the next unicorn VC is betting on.",
-    "Recession": "It’s a recession. Your mate says, ‘At least you’ve got your health!’ You laugh awkwardly  — because hey, you’ve handled worse, and you’ll figure this out too."
-};
- // Your full scenarios object (as in your version)
+    const scenarios = {
+        "Overdraft": "You check your balance and see you're £50 overdrawn. You call the bank, and they say, 'Just pay us back with interest.' You sigh, eat beans from the can, and remind yourself — this is temporary. You'll get back on top.",
+        "Credit Score": "You apply for a credit card and get rejected. The letter says, 'We regret to inform you.' You regret everything — but you start looking up ways to rebuild. There's always a way forward.",
+        "Savings Account": "You check your savings after a year and see 12p in interest. You laugh, but remind yourself — small steps are still steps.",
+        "Investing": "You invest in a ‘sure thing’ stock. It drops 80% in a week. You tell yourself it’s a ‘long-term investment’ — and honestly, it might be. Or at least a great story for future you, sipping wine but wiser.",
+        "Crypto": "You buy £100 of Dogecoin because Elon Musk tweeted about it. A week later, it’s worth £12. You tell yourself it’s a ‘long-term investment,’ but deep down, you know you’ve been scammed. Still, you’ve officially joined the 'I tried crypto' club. Badges pending.",
+        "Inflation": "You go to the shop and bread is £5. You pause, overwhelmed — but think, 'Time to get creative.' You adapt — and that's powerful.",
+        "NFTs": "You drop £500 on a rare Pepe NFT. A week later, it’s worth £3. Maybe next time, just get a meal from Pepe’s — at least that comes with fries. But hey, in the grand meme economy, every Pepe finds its moment. Yours just might be ahead.",
+        "Buy Now, Pay Later (BNPL)": "You buy a new TV with BNPL. A month later, you’re eating instant noodles for every meal. Future You is judging Present You hard, but Present You is watching Netflix in HD — and learning to budget better. Character development!",
+        "Pension": "You check your pension and it says you'll retire at 85. You laugh, but know it's not too late. Small steps matter.",
+        "Mortgage": "You finally get a mortgage. The bank says, 'Congrats, you're now in debt for 25 years.' You celebrate by crying with pride into instant coffee. Because you’ve worked hard for this, and you’ll handle what comes next.",
+        "Venture Capital": "You? You put £100 in a stock, and when it drops 20%, you stare at your screen like it’s a betrayal. Personal finance isn’t venture capital. You don’t get to lose 90% and still win. But maybe you’re the next unicorn VC is betting on.",
+        "Recession": "It’s a recession. Your mate says, ‘At least you’ve got your health!’ You laugh awkwardly  — because hey, you’ve handled worse, and you’ll figure this out too."
+    }; // Your full scenarios object (as in your version)
 
     const doomMessages = ["Welcome to Despair. It only gets worse from here.",
             "Doom Level: Mild. Like a drizzle of regret.",
@@ -180,6 +240,15 @@ const scenarios = {
         document.getElementById("term").textContent = termData.term;
         document.getElementById("explanation").textContent = termData.explanation;
         document.getElementById("scenario").textContent = scenarios[termData.term] || "No scenario found, but life is still tough.";
+
+        // Display the icon for the term
+        const termImage = document.getElementById("term-image");
+        if (termData.image) {
+            termImage.src = termData.image;
+            termImage.style.display = "block"; // Show the icon
+        } else {
+            termImage.style.display = "none"; // Hide the icon if none is provided
+        }
 
         // Trigger fade-in
         const container = document.getElementById("term-container");
@@ -226,11 +295,7 @@ const scenarios = {
 
     generateTerm(); // Show first term on load
 </script>
-
-
-
 </body>
 </html>
-
 
 
