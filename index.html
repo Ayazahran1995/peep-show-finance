@@ -3,30 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Learn about finance terms with a humorous twist. Understanding financial concepts through relatable scenarios and witty explanations.">
-    <meta name="keywords" content="finance terms, financial education, money management, financial literacy, finance explained">
-    <meta name="author" content="Your Name">
+    <meta name="description" content="Learn about finance terms with a humorous and relatable twist">
     <meta name="theme-color" content="#3533cd">
     
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Finance Explained, But With More Despair">
-    <meta property="og:description" content="Learn about finance terms with a humorous twist. Understanding financial concepts through relatable scenarios.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="[Your Website URL]">
-    
-    <!-- Preload Critical Resources -->
+    <!-- Preload critical resources -->
     <link rel="preload" href="PPNeueMachina-Regular.otf" as="font" type="font/otf" crossorigin>
     <link rel="preload" href="PPNeueMachina-Bold.otf" as="font" type="font/otf" crossorigin>
     
-    <title>�� Finance Explained, But With More Despair</title>
-
+    <title>💸 Finance Explained, But With More Despair</title>
+    
     <style>
-        /* Your existing styles remain the same */
-        /* Add these new accessibility and performance styles */
+        /* Fallback font stack */
+        body {
+            font-family: 'Neue Machina', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
 
-        /* Accessibility Improvements */
+        /* Existing font-face declarations */
+        @font-face {
+            font-family: 'Neue Machina';
+            src: url('PPNeueMachina-Regular.otf') format('opentype');
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Neue Machina Bold';
+            src: url('PPNeueMachina-Bold.otf') format('opentype');
+            font-display: swap;
+        }
+        <!-- Add this to your HTML -->
+<div class="journey-map">
+    <div class="journey-steps">
+        <div class="step" data-term="Savings Account">💰</div>
+        <div class="step" data-term="Investing">📈</div>
+        <div class="step" data-term="Crypto">🪙</div>
+        <div class="step" data-term="Mortgage">🏠</div>
+        <div class="step" data-term="Pension">👴</div>
+    </div>
+</div>
+
+<style>
+.journey-map {
+    margin: 20px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.journey-steps {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.journey-steps::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 1;
+}
+
+.step {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.step:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.step.completed {
+    background: #4CAF50;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+        /* Existing styles remain the same until .cta-buttons */
+        
+        .cta-buttons button {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 4vw;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 200px;
+        }
+
+        .cta-buttons button:hover { 
+            background: white; 
+            color: black; 
+            transform: translateY(-2px);
+        }
+
+        .cta-buttons button:active {
+            transform: translateY(0);
+        }
+
+        .cta-buttons button.loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .cta-buttons button:focus {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        @keyframes spin {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        /* Accessibility improvements */
         .visually-hidden {
             position: absolute;
             width: 1px;
@@ -38,14 +166,7 @@
             border: 0;
         }
 
-        /* Focus Styles */
-        button:focus,
-        .term-container:focus {
-            outline: 2px solid #fff;
-            outline-offset: 2px;
-        }
-
-        /* High Contrast Mode Support */
+        /* High contrast mode support */
         @media (forced-colors: active) {
             .term-container {
                 border: 2px solid CanvasText;
@@ -56,7 +177,7 @@
             }
         }
 
-        /* Reduced Motion Preference */
+        /* Reduced motion preference */
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
@@ -65,40 +186,22 @@
                 scroll-behavior: auto !important;
             }
         }
-
-        /* Loading State */
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
-        }
-
-        .loading::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #fff;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
-    <main role="main">
+    <main>
         <h1>💸 Finance Explained, But With More Despair</h1>
 
-        <div class="term-container" 
-             id="term-container"
-             role="region" 
-             aria-live="polite"
-             aria-label="Financial term display">
+        <div class="journey-map">
+    <div class="journey-steps">
+        <div class="step" data-term="Savings Account">💰</div>
+        <div class="step" data-term="Investing">📈</div>
+        <div class="step" data-term="Crypto">🪙</div>
+        <div class="step" data-term="Mortgage">🏠</div>
+        <div class="step" data-term="Pension">👴</div>
+    </div>
+        </div>
+        <div class="term-container" id="term-container" role="region" aria-live="polite">
             <div class="term-emoji" id="term-emoji" aria-hidden="true">💸</div>
             <div class="term" id="term">Loading misery...</div>
             <div class="explanation" id="explanation">Please hold. Doom is buffering.</div>
@@ -110,19 +213,23 @@
         <div id="achievements" role="status">Achievements: <span id="achievement-list">None yet. Keep clicking.</span></div>
 
         <div class="cta-buttons">
-            <button id="generate-btn" 
-                    onclick="generateTerm()"
-                    aria-label="Generate new financial term">
+            <button id="generate-btn" onclick="generateTerm()" aria-label="Generate new finance term">
                 Make It Worse
+                <span class="loading-spinner" aria-hidden="true"></span>
             </button>
         </div>
     </main>
 
-    <!-- Your existing JavaScript with these additions -->
     <script>
-        // Your existing variables and functions remain the same
+        // Existing financeTerms, scenarios, doomMessages, and achievements arrays remain the same
 
-        // Add keyboard navigation
+        let termsQueue = [...financeTerms];
+        let doomCount = 0;
+        let seenCount = 0;
+        let unlockedAchievements = [];
+        let buttonLocked = false;
+
+        // Add keyboard navigation support
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space' || e.code === 'Enter') {
                 e.preventDefault();
@@ -130,100 +237,71 @@
             }
         });
 
-        // Add loading state handling
-        function setLoading(isLoading) {
-            const button = document.getElementById('generate-btn');
-            if (isLoading) {
-                button.classList.add('loading');
-                button.setAttribute('aria-busy', 'true');
-            } else {
-                button.classList.remove('loading');
-                button.setAttribute('aria-busy', 'false');
-            }
-        }
-
-        // Update generateTerm function with loading state
         async function generateTerm() {
             if (buttonLocked) return;
+            
+            const button = document.getElementById('generate-btn');
+            const spinner = button.querySelector('.loading-spinner');
+            
             buttonLocked = true;
-            setLoading(true);
+            button.classList.add('loading');
+            spinner.style.display = 'block';
+            button.setAttribute('aria-busy', 'true');
 
-            const container = document.getElementById('term-container');
-            
-            // Fade out
-            container.style.opacity = '0';
-            
             try {
-                setTimeout(() => {
-                    if (termsQueue.length === 0) {
-                        termsQueue = [...financeTerms];
-                    }
+                if (termsQueue.length === 0) {
+                    termsQueue = [...financeTerms];
+                }
 
-                    const randomIndex = Math.floor(Math.random() * termsQueue.length);
-                    const termData = termsQueue.splice(randomIndex, 1)[0];
+                const randomIndex = Math.floor(Math.random() * termsQueue.length);
+                const termData = termsQueue.splice(randomIndex, 1)[0];
 
-                    // Update content
-                    document.getElementById("term").textContent = termData.term;
-                    document.getElementById("explanation").textContent = termData.explanation;
-                    document.getElementById("scenario").textContent = scenarios[termData.term] || "No scenario found, but life is still tough.";
-                    document.getElementById("term-emoji").textContent = termData.emoji;
+                // Update content with animation
+                const container = document.getElementById("term-container");
+                container.style.animation = "none";
+                void container.offsetWidth;
+                container.style.animation = "fadeIn 0.8s ease";
 
-                    // Fade in
-                    container.style.opacity = '1';
+                // Update content
+                document.getElementById("term").textContent = termData.term;
+                document.getElementById("explanation").textContent = termData.explanation;
+                document.getElementById("scenario").textContent = scenarios[termData.term] || "No scenario found, but life is still tough.";
+                document.getElementById("term-emoji").textContent = termData.emoji;
 
-                    // Update counters
-                    doomCount++;
-                    seenCount++;
-                    updateDoomCounter();
-                    updateProgress();
-                    checkAchievements();
+                // Update counters and achievements
+                doomCount++;
+                seenCount++;
+                updateDoomCounter();
+                updateProgress();
+                checkAchievements();
 
-                }, 300);
+                // Add to history for browser back/forward
+                history.pushState({ term: termData.term }, '', '#');
             } catch (error) {
                 console.error('Error generating term:', error);
                 alert('Something went wrong. Please try again.');
             } finally {
+                // Reset button state
                 setTimeout(() => {
                     buttonLocked = false;
-                    setLoading(false);
+                    button.classList.remove('loading');
+                    spinner.style.display = 'none';
+                    button.setAttribute('aria-busy', 'false');
                 }, 500);
             }
         }
 
-        // Add error handling for font loading
-        document.fonts.ready.then(() => {
-            document.body.classList.add('fonts-loaded');
-        }).catch(error => {
-            console.error('Error loading fonts:', error);
-        });
+        // Existing updateDoomCounter, updateProgress, checkAchievements, and updateAchievements functions remain the same
 
-        // Add service worker registration
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').catch(console.error);
-        }
-
-        // Initialize first term
+        // Initialize the app
         document.addEventListener('DOMContentLoaded', () => {
             generateTerm();
+            
+            // Add service worker registration
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js').catch(console.error);
+            }
         });
-    </script>
-
-    <!-- Add structured data for SEO -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Finance Explained, But With More Despair",
-        "description": "Learn about finance terms with a humorous twist. Understanding financial concepts through relatable scenarios.",
-        "applicationCategory": "EducationalApplication",
-        "operatingSystem": "Any",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        }
-    }
     </script>
 </body>
 </html>
-
