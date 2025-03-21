@@ -3,103 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn about finance terms with a humorous and relatable twist">
-    <meta name="theme-color" content="#3533cd">
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="PPNeueMachina-Regular.otf" as="font" type="font/otf" crossorigin>
-    <link rel="preload" href="PPNeueMachina-Bold.otf" as="font" type="font/otf" crossorigin>
-    
     <title>💸 Finance Explained, But With More Despair</title>
-    
     <style>
-        /* Fallback font stack */
-        body {
-            font-family: 'Neue Machina', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
-
-        /* Existing font-face declarations */
         @font-face {
             font-family: 'Neue Machina';
             src: url('PPNeueMachina-Regular.otf') format('opentype');
-            font-display: swap;
         }
 
         @font-face {
             font-family: 'Neue Machina Bold';
             src: url('PPNeueMachina-Bold.otf') format('opentype');
-            font-display: swap;
         }
-        <!-- Add this to your HTML -->
-<div class="journey-map">
-    <div class="journey-steps">
-        <div class="step" data-term="Savings Account">💰</div>
-        <div class="step" data-term="Investing">📈</div>
-        <div class="step" data-term="Crypto">🪙</div>
-        <div class="step" data-term="Mortgage">🏠</div>
-        <div class="step" data-term="Pension">👴</div>
-    </div>
-</div>
 
-<style>
-.journey-map {
-    margin: 20px;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-}
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Neue Machina', sans-serif;
+            color: white;
+            text-align: center;
+            background: transparent;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
 
-.journey-steps {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-}
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #000000, #3533cd);
+            z-index: -1;
+        }
 
-.journey-steps::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.2);
-    z-index: 1;
-}
+        h1 {
+            font-size: clamp(2rem, 8vw, 4rem);
+            margin-bottom: 20px;
+        }
 
-.step {
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 2;
-}
+        .term-container {
+            padding: 20px;
+            max-width: 90%;
+            margin: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
 
-.step:hover {
-    transform: scale(1.1);
-    background: rgba(255, 255, 255, 0.2);
-}
+        .fade-in {
+            animation: fadeIn 0.8s ease;
+        }
 
-.step.completed {
-    background: #4CAF50;
-    animation: pulse 1s infinite;
-}
+        .term { font-size: clamp(1.5rem, 6vw, 3rem); font-weight: bold; margin-bottom: 15px; }
+        .explanation { font-size: clamp(1rem, 4vw, 2rem); line-height: 1.5; }
+        .scenario { font-size: clamp(0.875rem, 3.5vw, 1.5rem); color: rgba(255, 255, 255, 0.8); margin-top: 15px; font-style: italic; }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
+        .term-emoji {
+            font-size: clamp(3rem, 10vw, 5rem);
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
 
-        /* Existing styles remain the same until .cta-buttons */
-        
+        .cta-buttons { margin-top: 20px; }
         .cta-buttons button {
             background: transparent;
             border: 2px solid white;
@@ -107,121 +79,67 @@
             padding: 15px 25px;
             border-radius: 50px;
             cursor: pointer;
-            font-size: 4vw;
+            font-size: clamp(1rem, 4vw, 1.5rem);
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            min-width: 200px;
+        }
+        .cta-buttons button:hover { background: white; color: black; }
+
+        #doom-counter, #progress, #achievements {
+            margin-top: 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(8px);
         }
 
-        .cta-buttons button:hover { 
-            background: white; 
-            color: black; 
-            transform: translateY(-2px);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .cta-buttons button:active {
-            transform: translateY(0);
-        }
-
-        .cta-buttons button.loading {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        .cta-buttons button:focus {
-            outline: 2px solid #fff;
-            outline-offset: 2px;
-        }
-
-        /* Loading spinner */
-        .loading-spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #ffffff;
-            border-top: 2px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        @keyframes spin {
-            0% { transform: translateY(-50%) rotate(0deg); }
-            100% { transform: translateY(-50%) rotate(360deg); }
-        }
-
-        /* Accessibility improvements */
-        .visually-hidden {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-
-        /* High contrast mode support */
-        @media (forced-colors: active) {
-            .term-container {
-                border: 2px solid CanvasText;
-            }
-            
-            .cta-buttons button {
-                border: 2px solid CanvasText;
-            }
-        }
-
-        /* Reduced motion preference */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
     </style>
 </head>
 <body>
-    <main>
-        <h1>💸 Finance Explained, But With More Despair</h1>
 
-        <div class="journey-map">
-    <div class="journey-steps">
-        <div class="step" data-term="Savings Account">💰</div>
-        <div class="step" data-term="Investing">📈</div>
-        <div class="step" data-term="Crypto">🪙</div>
-        <div class="step" data-term="Mortgage">🏠</div>
-        <div class="step" data-term="Pension">👴</div>
-    </div>
-        </div>
-        <div class="term-container" id="term-container" role="region" aria-live="polite">
-            <div class="term-emoji" id="term-emoji" aria-hidden="true">💸</div>
-            <div class="term" id="term">Loading misery...</div>
-            <div class="explanation" id="explanation">Please hold. Doom is buffering.</div>
-            <div class="scenario" id="scenario">*Awkward scenario loading...*</div>
-        </div>
+<h1>💸 Finance Explained, But With More Despair</h1>
 
-        <div id="doom-counter" role="status">Doom Level: <span id="doom-count">0</span> - <span id="doom-message">Welcome to Despair.</span></div>
-        <div id="progress" role="status">Seen <span id="seen-count">0</span>/<span id="total-terms">12</span> terms. Keep going!</div>
-        <div id="achievements" role="status">Achievements: <span id="achievement-list">None yet. Keep clicking.</span></div>
+<div class="term-container fade-in" id="term-container">
+    <div class="term-emoji" id="term-emoji">💸</div>
+    <div class="term" id="term">Loading misery...</div>
+    <div class="explanation" id="explanation">Please hold. Doom is buffering.</div>
+    <div class="scenario" id="scenario">*Awkward scenario loading...*</div>
+</div>
 
-        <div class="cta-buttons">
-            <button id="generate-btn" onclick="generateTerm()" aria-label="Generate new finance term">
-                Make It Worse
-                <span class="loading-spinner" aria-hidden="true"></span>
-            </button>
-        </div>
-    </main>
+<div id="doom-counter">Doom Level: <span id="doom-count">0</span> - <span id="doom-message">Welcome to Despair.</span></div>
+<div id="progress">Seen <span id="seen-count">0</span>/<span id="total-terms">12</span> terms. Keep going!</div>
+<div id="achievements">Achievements: <span id="achievement-list">None yet. Keep clicking.</span></div>
 
-    <script>
-        // Existing financeTerms, scenarios, doomMessages, and achievements arrays remain the same
+<div class="cta-buttons">
+    <button id="generate-btn" onclick="generateTerm()" aria-label="Generate new finance term" aria-busy="false">Make It Worse</button>
+</div>
+
+<script>
+    (function () {
+        const financeTerms = [
+            { term: "Overdraft", explanation: "An overdraft is your bank saying, ‘Go on then, have some money you don’t have.’ But the catch is, it’s actually their money, and they’ll want it back. With interest. And disappointment.", emoji: "💸" },
+            // Add other terms...
+        ];
+
+        const scenarios = {
+            "Overdraft": "You check your balance and see you're £50 overdrawn. You call the bank, and they say, 'Just pay us back with interest.' You sigh, eat beans from the can, and remind yourself - this is temporary. You'll get back on top.",
+            // Add other scenarios...
+        };
+
+        const doomMessages = ["Welcome to Despair. It only gets worse from here.", "Doom Level: Mild. Like a drizzle of regret.", /* Add other messages... */];
+        const achievements = [
+            { name: "Doom Novice", description: "Seen 3 terms. Welcome to despair.", threshold: 3 },
+            // Add other achievements...
+        ];
 
         let termsQueue = [...financeTerms];
         let doomCount = 0;
@@ -229,79 +147,68 @@
         let unlockedAchievements = [];
         let buttonLocked = false;
 
-        // Add keyboard navigation support
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space' || e.code === 'Enter') {
-                e.preventDefault();
-                generateTerm();
-            }
-        });
-
-        async function generateTerm() {
+        function generateTerm() {
             if (buttonLocked) return;
-            
             const button = document.getElementById('generate-btn');
-            const spinner = button.querySelector('.loading-spinner');
-            
-            buttonLocked = true;
-            button.classList.add('loading');
-            spinner.style.display = 'block';
             button.setAttribute('aria-busy', 'true');
+            buttonLocked = true;
 
-            try {
-                if (termsQueue.length === 0) {
-                    termsQueue = [...financeTerms];
-                }
+            setTimeout(() => {
+                button.setAttribute('aria-busy', 'false');
+                buttonLocked = false;
+            }, 500);
 
-                const randomIndex = Math.floor(Math.random() * termsQueue.length);
-                const termData = termsQueue.splice(randomIndex, 1)[0];
-
-                // Update content with animation
-                const container = document.getElementById("term-container");
-                container.style.animation = "none";
-                void container.offsetWidth;
-                container.style.animation = "fadeIn 0.8s ease";
-
-                // Update content
-                document.getElementById("term").textContent = termData.term;
-                document.getElementById("explanation").textContent = termData.explanation;
-                document.getElementById("scenario").textContent = scenarios[termData.term] || "No scenario found, but life is still tough.";
-                document.getElementById("term-emoji").textContent = termData.emoji;
-
-                // Update counters and achievements
-                doomCount++;
-                seenCount++;
-                updateDoomCounter();
-                updateProgress();
-                checkAchievements();
-
-                // Add to history for browser back/forward
-                history.pushState({ term: termData.term }, '', '#');
-            } catch (error) {
-                console.error('Error generating term:', error);
-                alert('Something went wrong. Please try again.');
-            } finally {
-                // Reset button state
-                setTimeout(() => {
-                    buttonLocked = false;
-                    button.classList.remove('loading');
-                    spinner.style.display = 'none';
-                    button.setAttribute('aria-busy', 'false');
-                }, 500);
+            if (termsQueue.length === 0) {
+                termsQueue = [...financeTerms];
             }
+
+            const randomIndex = Math.floor(Math.random() * termsQueue.length);
+            const termData = termsQueue.splice(randomIndex, 1)[0];
+            document.getElementById("term").textContent = termData?.term || "Unknown Term";
+            document.getElementById("explanation").textContent = termData?.explanation || "No explanation available.";
+            document.getElementById("scenario").textContent = scenarios[termData?.term] || "No scenario found, but life is still tough.";
+            document.getElementById("term-emoji").textContent = termData?.emoji || "💸";
+
+            const container = document.getElementById("term-container");
+            container.classList.remove('fade-in');
+            void container.offsetWidth;
+            container.classList.add('fade-in');
+
+            doomCount++;
+            seenCount++;
+            updateDoomCounter();
+            updateProgress();
+            checkAchievements();
         }
 
-        // Existing updateDoomCounter, updateProgress, checkAchievements, and updateAchievements functions remain the same
+        function updateDoomCounter() {
+            document.getElementById('doom-count').textContent = doomCount;
+            document.getElementById('doom-message').textContent = doomMessages[Math.min(doomCount, doomMessages.length - 1)];
+        }
 
-        // Initialize the app
-        document.addEventListener('DOMContentLoaded', () => {
-            generateTerm();
-            
-            // Add service worker registration
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/sw.js').catch(console.error);
-            }
-        });
-    </script>
+        function updateProgress() {
+            const totalTerms = financeTerms.length;
+            const effectiveSeenCount = Math.min(seenCount, totalTerms * 2);
+            document.getElementById("seen-count").textContent = effectiveSeenCount;
+            document.getElementById("total-terms").textContent = totalTerms;
+        }
+
+        function checkAchievements() {
+            achievements.forEach(ach => {
+                if (seenCount >= ach.threshold && !unlockedAchievements.includes(ach.name)) {
+                    unlockedAchievements.push(ach.name);
+                    updateAchievements();
+                    alert(`🎉 Achievement Unlocked: ${ach.name} - ${ach.description}`);
+                }
+            });
+        }
+
+        function updateAchievements() {
+            document.getElementById("achievement-list").textContent = unlockedAchievements.length > 0 ? unlockedAchievements.join(", ") : "None yet. Keep clicking.";
+        }
+
+        generateTerm(); // Show first term on load
+    })();
+</script>
 </body>
 </html>
