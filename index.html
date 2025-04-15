@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💸 Finance Explained, But With More Despair</title>
+    <title>💸 Finance Explained, But With More...Honesty</title>
     <style>
         @font-face {
             font-family: 'Neue Machina';
             src: url('PPNeueMachina-Regular.otf') format('opentype');
+            font-display: swap;
         }
 
         @font-face {
             font-family: 'Neue Machina Bold';
             src: url('PPNeueMachina-Bold.otf') format('opentype');
+            font-display: swap;
         }
 
+        /* Base styles */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Neue Machina', sans-serif;
+            font-family: 'Neue Machina', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             color: white;
             text-align: center;
             background: transparent;
@@ -27,211 +30,394 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
         }
 
         body::before {
             content: '';
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, #000000, #3533cd); /* Linear gradient at 90 degrees */
+            background: linear-gradient(90deg, #000000, #3533cd);
             z-index: -1;
         }
 
         h1 {
-            font-size: 8vw;
+            font-size: clamp(2rem, 5vw, 4rem);
             margin-bottom: 20px;
+            margin-top: 80px;
+            padding: 0 15px;
         }
 
         .term-container {
             padding: 20px;
-            max-width: 90%;
-            margin: 20px;
+            width: 90%;
+            max-width: 700px;
+            margin: 20px auto;
             background: rgba(0, 0, 0, 0.5);
             border-radius: 20px;
             backdrop-filter: blur(10px);
             animation: fadeIn 0.8s ease;
             position: relative;
+            box-sizing: border-box;
         }
 
-        .term { font-size: 6vw; font-weight: bold; margin-bottom: 15px; }
-        .explanation { font-family: 'Neue Machina Light'; font-size: 4vw; line-height: 1.5; }
-        .scenario { font-family: 'Neue Machina Light'; font-size: 3.5vw; color: rgba(255, 255, 255, 0.8); margin-top: 15px; font-style: italic; }
+        .term { 
+            font-size: clamp(1.5rem, 4vw, 3rem); 
+            font-weight: bold; 
+            margin-bottom: 15px; 
+        }
+        
+        .explanation { 
+            font-family: 'Neue Machina', sans-serif; 
+            font-size: clamp(1rem, 2.5vw, 1.5rem); 
+            line-height: 1.5; 
+        }
+        
+        .scenario { 
+            font-family: 'Neue Machina', sans-serif; 
+            font-size: clamp(0.9rem, 2vw, 1.2rem); 
+            color: rgba(255, 255, 255, 0.8); 
+            margin-top: 15px; 
+            font-style: italic; 
+        }
 
         .term-emoji {
-            font-size: 10vw; /* Large emoji size */
+            font-size: clamp(3rem, 8vw, 5rem);
             margin-bottom: 15px;
-            animation: bounce 2s infinite; /* Bounce animation */
+            animation: bounce 2s infinite;
         }
 
-        .cta-buttons { margin-top: 20px; }
+        /* MAKE IT WORSE BUTTON - NOW MORE VISIBLE */
+        .cta-buttons { 
+            margin: 30px 0;
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        
         .cta-buttons button {
             background: transparent;
             border: 2px solid white;
             color: white;
-            padding: 15px 25px;
+            padding: clamp(10px, 2vw, 15px) clamp(15px, 3vw, 25px);
             border-radius: 50px;
             cursor: pointer;
-            font-size: 4vw;
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            font-family: inherit;
+            max-width: 100%;
             transition: all 0.3s ease;
+            animation: pulse 2s infinite;
         }
-        .cta-buttons button:hover { background: white; color: black; }
+        
+        .cta-buttons button:hover { 
+            background: white; 
+            color: black;
+            animation: none;
+        }
 
-        #doom-counter, #progress, #achievements {
-            margin-top: 20px;
-            color: white;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px 20px;
+        /* Progress Ribbon */
+        #progress-ribbon {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            z-index: 100;
+            font-size: clamp(0.8rem, 2vw, 1.2rem);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Progress Counter Animation */
+        @keyframes counterPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); color: #ff9500; }
+            100% { transform: scale(1); }
+        }
+
+        #seen-count {
+            display: inline-block;
+            animation-duration: 0.5s;
+            animation-fill-mode: both;
+        }
+
+        .counter-animate {
+            animation-name: counterPulse;
+        }
+
+        /* Doom Meter */
+        #doom-meter-container {
+            width: 90%;
+            max-width: 700px;
+            margin: 10px auto;
+        }
+        
+        #doom-meter {
+            width: 100%;
+            height: clamp(10px, 2vw, 20px);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 10px;
-            backdrop-filter: blur(8px);
+            overflow: hidden;
+        }
+        
+        #doom-fill {
+            height: 100%;
+            background: linear-gradient(to right, #ff0000, #ff00ff);
+            width: 0%;
+            transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        #doom-message {
+            font-size: clamp(0.8rem, 2vw, 1.2rem);
+            margin-top: 5px;
+            height: 2.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s;
         }
 
+        /* Achievement Badge */
+        #achievement-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            width: clamp(40px, 8vw, 50px);
+            height: clamp(40px, 8vw, 50px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            transition: transform 0.3s;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        #achievement-badge:hover {
+            transform: scale(1.1);
+        }
+        
+        #achievement-popup {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            max-width: clamp(200px, 50vw, 300px);
+            display: none;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Progress Indicator for unique terms seen */
+        #terms-progress {
+            display: flex;
+            justify-content: center;
+            margin: 15px auto;
+            width: 90%;
+            max-width: 700px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .term-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .term-seen {
+            background: #ff00ff;
+            box-shadow: 0 0 5px #ff00ff;
+        }
+
+        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
+        
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
         }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
 
-        @media (min-width: 600px) {
-            h1 { font-size: 3em; }
-            .term { font-size: 2.5em; }
-            .explanation { font-size: 1.4em; }
-            .scenario { font-size: 1.2em; }
-            .cta-buttons button { font-size: 1em; }
-            .term-emoji { font-size: 5em; } /* Adjust emoji size for larger screens */
+        /* Media queries for better responsiveness */
+        @media (max-width: 480px) {
+            h1 {
+                margin-top: 60px;
+                padding: 0 10px;
+            }
+            
+            .term-container {
+                padding: 15px;
+                margin: 10px auto;
+            }
+            
+            #achievement-popup {
+                right: 10px;
+                bottom: 70px;
+                max-width: 80%;
+            }
+        }
+        
+        /* Taller mobile screens */
+        @media (max-height: 700px) {
+            h1 {
+                margin-top: 50px;
+                margin-bottom: 10px;
+            }
+            
+            .term-container {
+                margin: 5px auto;
+            }
+            
+            .cta-buttons {
+                margin: 15px 0;
+            }
         }
     </style>
 </head>
 <body>
 
-<h1>💸 Finance Explained, But With More Despair</h1>
+<!-- Progress Ribbon -->
+<div id="progress-ribbon">
+    Seen <span id="seen-count">0</span> terms (<span id="unique-terms">0</span>/<span id="total-terms">12</span> unique)
+</div>
+
+<h1>💸 Finance Explained, But With More..Honesty</h1>
 
 <div class="term-container" id="term-container">
-    <div class="term-emoji" id="term-emoji">💸</div> <!-- Emoji placeholder -->
-    <div class="term" id="term">Loading misery...</div>
-    <div class="explanation" id="explanation">Please hold. Doom is buffering.</div>
+    <div class="term-emoji" id="term-emoji">💸</div>
+    <div class="term" id="term">Loading Financial Wokeness...</div>
+    <div class="explanation" id="explanation">Please hold.</div>
     <div class="scenario" id="scenario">*Awkward scenario loading...*</div>
 </div>
 
-<div id="doom-counter">Doom Level: <span id="doom-count">0</span> - <span id="doom-message">Welcome to Despair.</span></div>
-<div id="progress">Seen <span id="seen-count">0</span>/<span id="total-terms">12</span> terms. Keep going!</div>
-<div id="achievements">Achievements: <span id="achievement-list">None yet. Keep clicking.</span></div>
+<!-- Doom Meter -->
+<div id="doom-meter-container">
+    <div id="doom-meter">
+        <div id="doom-fill"></div>
+    </div>
+    <div id="doom-message">Welcome to Your Finance Bro Days.</div>
+</div>
 
+<!-- Term Progress Indicators -->
+<div id="terms-progress"></div>
+
+<!-- Achievement Badge -->
+<div id="achievement-badge" onclick="toggleAchievements()">🏆</div>
+<div id="achievement-popup">
+    <strong>Achievements:</strong>
+    <div id="achievement-list">None yet. Keep clicking.</div>
+</div>
+
+<!-- MAKE IT WORSE BUTTON - NOW MORE VISIBLE -->
 <div class="cta-buttons">
-    <button id="generate-btn" onclick="generateTerm()">Make It Worse</button>
+    <button id="generate-btn" onclick="generateTerm()">Show Me The Terms</button>
 </div>
 
 <script>
+    // Finance terms and scenarios
     const financeTerms = [
-        { 
-            term: "Overdraft", 
-            explanation: "An overdraft is your bank saying, ‘Go on then, have some money you don’t have.’ But the catch is, it’s actually their money, and they’ll want it back. With interest. And disappointment.",
-            emoji: "💸" // Emoji for Overdraft
-        },
-        { 
-            term: "Credit Score", 
-            explanation: "A credit score is an algorithm’s way of keeping tabs on your financial history. It quietly notes every loan, payment, and overdraft, then sums up your trustworthiness in a single number. That number decides how easy, or painful, borrowing money will be. No drama, just math. And judgement.",
-            emoji: "📉" // Emoji for Credit Score
-        },
-        { 
-            term: "Savings Account", 
-            explanation: "A savings account is a magical place where you put your money so the bank can use it, while giving you just enough interest to afford half a Tesco meal deal after a decade.",
-            emoji: "💰" // Emoji for Savings Account
-        },
-        { 
-            term: "Investing", 
-            explanation: "Investing is making confident guesses with your money — but when you wear a suit, it’s called ‘financial planning.’",
-            emoji: "📈" // Emoji for Investing
-        },
-        { 
-            term: "Crypto", 
-            explanation: "Crypto is like digital magic beans. Sometimes they make you rich, sometimes they make you cry, and usually, they do both in the same week.",
-            emoji: "🪙" // Emoji for Crypto
-        },
-        { 
-            term: "Inflation", 
-            explanation: "Inflation is when everything costs more, but your salary stays the same. It’s like trying to run up an escalator that’s going down. And it's on fire.",
-            emoji: "🔥" // Emoji for Inflation
-        },
-        { 
-            term: "NFTs", 
-            explanation: "NFTs are like buying an expensive painting, except there’s no painting. Just the ‘vibes’ of a painting. Oh, and your vibes are now worth 3p.",
-            emoji: "🖼️" // Emoji for NFTs
-        },
-        { 
-            term: "Buy Now, Pay Later (BNPL)", 
-            explanation: "Buy Now, Pay Later is basically Future You’s problem. Except Future You is already drowning in questionable financial decisions. Cheers, mate.",
-            emoji: "💳" // Emoji for BNPL
-        },
-        { 
-            term: "Pension", 
-            explanation: "A pension is a slow-motion heist where you spend decades trying to save enough money to retire, but by the time you do, they’ve moved the goalposts to ‘work until you drop.’",
-            emoji: "👴" // Emoji for Pension
-        },
-        { 
-            term: "Mortgage", 
-            explanation: "A mortgage is a 25-year deal where you rent from the bank, except instead of a landlord, you have an interest rate that judges you.",
-            emoji: "🏠" // Emoji for Mortgage
-        },
-        { 
-            term: "Venture Capital", 
-            explanation: "Unicorns might be fictional, but in VC, the odds of finding one are slim, never zero. VC is placing 100 bets, knowing 90 will fail spectacularly, but the 10 that win might just buy them an island. One big win makes all the losses worth it.",
-            emoji: "🦄" // Emoji for Venture Capital
-        },
-        { 
-            term: "Recession", 
-            explanation: "A recession is when the economy throws a tantrum and suddenly everyone pretends they didn’t see it coming. Again.",
-            emoji: "📉" // Emoji for Recession
-        }
-    ]; // Your full finance terms array with emojis
+        { term: "Overdraft", emoji: "💸", explanation: "An overdraft is your bank saying, 'Go on then, have some money you don't have.' But the catch is, it's actually their money, and they'll want it back. With interest. And disappointment." },
+        { term: "Credit Score", emoji: "📉", explanation: "A credit score is an algorithm's way of keeping tabs on your financial history. It quietly notes every loan, payment, and overdraft, then sums up your trustworthiness in a single number. That number decides how easy, or painful, borrowing money will be. No drama, just math. And judgement." },
+        { term: "Savings Account", emoji: "💰", explanation: "A savings account is a magical place where you put your money so the bank can use it, while giving you just enough interest to afford half a Tesco meal deal after a decade." },
+        { term: "Investing", emoji: "📈", explanation: "Investing is making confident guesses with your money — but when you wear a suit, it's called 'financial planning.'" },
+        { term: "Crypto", emoji: "🪙", explanation: "Crypto is like digital magic beans. Sometimes they make you rich, sometimes they make you cry, and usually, they do both in the same week." },
+        { term: "Inflation", emoji: "🔥", explanation: "Inflation is when everything costs more, but your salary stays the same. It's like trying to run up an escalator that's going down. And it's on fire." },
+        { term: "NFTs", emoji: "🖼️", explanation: "NFTs are like buying an expensive painting, except there's no painting. Just the 'vibes' of a painting. Oh, and your vibes are now worth 3p." },
+        { term: "Buy Now, Pay Later (BNPL)", emoji: "💳", explanation: "Buy Now, Pay Later is basically Future You's problem. Except Future You is already drowning in questionable financial decisions. Cheers, mate." },
+        { term: "Pension", emoji: "👴", explanation: "A pension is a slow-motion heist where you spend decades trying to save enough money to retire, but by the time you do, they've moved the goalposts to 'work until you drop.'" },
+        { term: "Mortgage", emoji: "🏠", explanation: "A mortgage is a 25-year deal where you rent from the bank, except instead of a landlord, you have an interest rate that judges you." },
+        { term: "Venture Capital", emoji: "🦄", explanation: "Unicorns might be fictional, but in VC, the odds of finding one are slim, never zero. VC is placing 100 bets, knowing 90 will fail spectacularly, but the 10 that win might just buy them an island. One big win makes all the losses worth it." },
+        { term: "Recession", emoji: "📉", explanation: "A recession is when the economy throws a tantrum and suddenly everyone pretends they didn't see it coming. Again." }
+    ];
 
     const scenarios = {
         "Overdraft": "You check your balance and see you're £50 overdrawn. You call the bank, and they say, 'Just pay us back with interest.' You sigh, eat beans from the can, and remind yourself - this is temporary. You'll get back on top.",
         "Credit Score": "You apply for a credit card and get rejected. The letter says, 'We regret to inform you.' You regret everything - but you start looking up ways to rebuild. There's always a way forward.",
         "Savings Account": "You check your savings after a year and see 12p in interest. You laugh, but remind yourself - small steps are still steps.",
-        "Investing": "You invest in a ‘sure thing’ stock. It drops 80% in a week. You tell yourself it’s a ‘long-term investment’ - and honestly, it might be. Or at least a great story for future you, sipping wine but wiser.",
-        "Crypto": "You buy £100 of Dogecoin because Elon Musk tweeted about it. A week later, it’s worth £12. You tell yourself it’s a ‘long-term investment,’ but deep down, you know you’ve been scammed. Still, you’ve officially joined the 'I tried crypto' club. Badges pending.",
+        "Investing": "You invest in a 'sure thing' stock. It drops 80% in a week. You tell yourself it's a 'long-term investment' - and honestly, it might be. Or at least a great story for future you, sipping wine but wiser.",
+        "Crypto": "You buy £100 of Dogecoin because Elon Musk tweeted about it. A week later, it's worth £12. You tell yourself it's a 'long-term investment,' but deep down, you know you've been scammed. Still, you've officially joined the 'I tried crypto' club. Badges pending.",
         "Inflation": "You go to the shop and bread is £5. You pause, overwhelmed - but think, 'Time to get creative.' You adapt - and that's powerful.",
-        "NFTs": "You drop £500 on a rare Pepe NFT. A week later, it’s worth £3. Maybe next time, just get a meal from Pepe’s - at least that comes with fries. But hey, in the grand meme economy, every Pepe finds its moment. Yours just might be ahead.",
-        "Buy Now, Pay Later (BNPL)": "You buy a new TV with BNPL. A month later, you’re eating instant noodles for every meal. Future You is judging Present You hard, but Present You is watching Netflix in HD — and learning to budget better. Character development!",
+        "NFTs": "You drop £500 on a rare Pepe NFT. A week later, it's worth £3. Maybe next time, just get a meal from Pepe's - at least that comes with fries. But hey, in the grand meme economy, every Pepe finds its moment. Yours just might be ahead.",
+        "Buy Now, Pay Later (BNPL)": "You buy a new TV with BNPL. A month later, you're eating instant noodles for every meal. Future You is judging Present You hard, but Present You is watching Netflix in HD — and learning to budget better. Character development!",
         "Pension": "You check your pension and it says you'll retire at 85. You laugh, but know it's not too late. Small steps matter.",
-        "Mortgage": "You finally get a mortgage. The bank says, 'Congrats, you're now in debt for 25 years.' You celebrate by crying with pride into instant coffee. Because you’ve worked hard for this, and you’ll handle what comes next.",
-        "Venture Capital": "You? You put £100 in a stock, and when it drops 20%, you stare at your screen like it’s a betrayal. Personal finance isn’t venture capital. You don’t get to lose 90% and still win. But maybe you’re the next unicorn VC is betting on.",
-        "Recession": "It’s a recession. Your mate says, ‘At least you’ve got your health!’ You laugh awkwardly  - because hey, you’ve handled worse, and you’ll figure this out too."
-    }; // Your full scenarios object (as in your version)
+        "Mortgage": "You finally get a mortgage. The bank says, 'Congrats, you're now in debt for 25 years.' You celebrate by crying with pride into instant coffee. Because you've worked hard for this, and you'll handle what comes next.",
+        "Venture Capital": "You? You put £100 in a stock, and when it drops 20%, you stare at your screen like it's a betrayal. Personal finance isn't venture capital. You don't get to lose 90% and still win. But maybe you're the next unicorn VC is betting on.",
+        "Recession": "It's a recession. Your mate says, 'At least you've got your health!' You laugh awkwardly  - because hey, you've handled worse, and you'll figure this out too."
+    };
 
-    const doomMessages = ["Welcome to Despair. It only gets worse from here.",
-            "Doom Level: Mild. Like a drizzle of regret.",
-            "Doom Level: Moderate. You’re getting the hang of this. Unfortunately.",
-            "Doom Level: High. Like a slow-motion cyclists' crash.",
-            "Doom Level: Severe. You’re in too deep now.",
-            "Doom Level: Catastrophic. Why do you keep clicking?",
-            "Doom Level: Apocalyptic. You’ve reached peak despair.",
-            "Doom Level: Maximum Despair Achieved. Congratulations?"]; // Your doom messages (as in your version)
-    const achievements = [
-        { name: "Doom Novice", description: "Seen 3 terms. Welcome to despair.", threshold: 3 },
-        { name: "Master of Despair", description: "Seen all terms. Congratulations, you're officially miserable.", threshold: financeTerms.length },
-        { name: "Financial Masochist", description: "Seen all terms twice. Why are you like this?", threshold: financeTerms.length * 2 }
+    const doomMessages = [
+        "Level 0: Still Standing.",
+        "Level 1: Mild Financial Awareness Achieved.",
+        "Level 2: Accidental Economist Mode Engaged.",
+        "Level 3: Budget Bruised, But Learning.",
+        "Level 4: Surviving Late-Stage Capitalism.",
+        "Level 5: Jaded, But Resourceful.",
+        "Level 6: Existentially Financially Fluent.",
+        "Level 7: Zen Master of Modern Money Mayhem.",
+        "Level 8: Financial Oracle Status Activated.",
+        "Level 9: Transcending Money Itself.",
+        "Level 10: Financial Enlightenment Achieved.",
+        "Level 11: Finance Buddha Has Entered the Chat.",
+        "Level 12: You Now See The Matrix of Money."
     ];
 
+    const achievements = [
+        { name: "Financially Woke", description: "You've seen 3 terms. Awareness is the first step.", threshold: 3 },
+        { name: "Veteran of Value", description: "You've seen all terms once. Knowledge is resilience.", threshold: financeTerms.length },
+        { name: "Cynical Optimist", description: "You've seen every term twice. At this point, you either laugh or cry.", threshold: financeTerms.length * 2 }
+    ];
+
+    // Initialize variables
     let termsQueue = [...financeTerms];
     let doomCount = 0;
     let seenCount = 0;
+    let uniqueTermsSeen = new Set();
     let unlockedAchievements = [];
     let buttonLocked = false;
+    let lastTerm = "";
+
+    // Set total terms in UI
+    document.getElementById("total-terms").textContent = financeTerms.length;
+
+    // Set up term progress indicators
+    const termsProgressContainer = document.getElementById("terms-progress");
+    for (let i = 0; i < financeTerms.length; i++) {
+        const indicator = document.createElement("div");
+        indicator.className = "term-indicator";
+        indicator.id = `term-indicator-${i}`;
+        termsProgressContainer.appendChild(indicator);
+    }
 
     function generateTerm() {
         if (buttonLocked) return;
         buttonLocked = true;
-        setTimeout(() => buttonLocked = false, 500); // Debounce
+        setTimeout(() => buttonLocked = false, 500);
 
         if (termsQueue.length === 0) {
             termsQueue = [...financeTerms];
@@ -242,55 +428,193 @@
         document.getElementById("term").textContent = termData.term;
         document.getElementById("explanation").textContent = termData.explanation;
         document.getElementById("scenario").textContent = scenarios[termData.term] || "No scenario found, but life is still tough.";
+        document.getElementById("term-emoji").textContent = termData.emoji;
 
-        // Display the emoji for the term
-        const termEmoji = document.getElementById("term-emoji");
-        termEmoji.textContent = termData.emoji;
+        // Store this term as seen
+        uniqueTermsSeen.add(termData.term);
+        
+        // Update the term progress indicators
+        updateTermIndicators();
 
-        // Trigger fade-in
+        // Animate container
         const container = document.getElementById("term-container");
         container.style.animation = "none";
-        void container.offsetWidth; // Trigger reflow to reset animation
+        void container.offsetWidth;
         container.style.animation = "fadeIn 0.8s ease";
+
+        // Save the last term shown
+        lastTerm = termData.term;
 
         doomCount++;
         seenCount++;
-        updateDoomCounter();
-        updateProgress();
+        updateUI();
         checkAchievements();
+        saveProgress();
     }
 
-    function updateDoomCounter() {
-        document.getElementById('doom-count').textContent = doomCount;
-        document.getElementById('doom-message').textContent = doomMessages[Math.min(doomCount, doomMessages.length - 1)];
-    }
-
-    function updateProgress() {
-        const totalTerms = financeTerms.length;
-        const effectiveSeenCount = seenCount > totalTerms * 2 ? totalTerms * 2 : seenCount;
-        document.getElementById("seen-count").textContent = effectiveSeenCount;
-        document.getElementById("total-terms").textContent = totalTerms;
-    }
-
-    function checkAchievements() {
-        achievements.forEach(ach => {
-            if (seenCount >= ach.threshold && !unlockedAchievements.includes(ach.name)) {
-                unlockedAchievements.push(ach.name);
-                updateAchievements();
-                alert(`🎉 Achievement Unlocked: ${ach.name} - ${ach.description}`);
+    function updateTermIndicators() {
+        // Find the index of each term seen
+        financeTerms.forEach((term, index) => {
+            const indicator = document.getElementById(`term-indicator-${index}`);
+            if (uniqueTermsSeen.has(term.term)) {
+                indicator.classList.add("term-seen");
             }
         });
     }
 
-    function updateAchievements() {
+    function updateUI() {
+        // Update progress counter with animation
+        const seenCountElement = document.getElementById("seen-count");
+        const uniqueTermsElement = document.getElementById("unique-terms");
+        
+        seenCountElement.textContent = seenCount;
+        uniqueTermsElement.textContent = uniqueTermsSeen.size;
+        
+        // Animate counter
+        seenCountElement.classList.remove("counter-animate");
+        void seenCountElement.offsetWidth;
+        seenCountElement.classList.add("counter-animate");
+
+        // Update doom meter - now scaled to show progress through all 12 terms
+        // Use uniqueTermsSeen.size for smooth progression through all terms
+        const progressPercentage = Math.min(100, (uniqueTermsSeen.size / financeTerms.length) * 100);
+        document.getElementById("doom-fill").style.width = `${progressPercentage}%`;
+        
+        // Update doom message based on unique terms seen
+        const doomMessageIndex = Math.min(uniqueTermsSeen.size, doomMessages.length - 1);
+        
+        // Fade out the message
+        const doomMessageElement = document.getElementById("doom-message");
+        doomMessageElement.style.opacity = "0";
+        
+        // After fade out, update text and fade back in
+        setTimeout(() => {
+            doomMessageElement.textContent = doomMessages[doomMessageIndex];
+            doomMessageElement.style.opacity = "1";
+        }, 300);
+    }
+
+    function checkAchievements() {
+        achievements.forEach(ach => {
+            if ((ach.threshold <= 12 && uniqueTermsSeen.size >= ach.threshold) || 
+                (ach.threshold > 12 && seenCount >= ach.threshold)) {
+                
+                if (!unlockedAchievements.includes(ach.name)) {
+                    unlockedAchievements.push(ach.name);
+                    showAchievementNotification(ach);
+                    updateAchievementPopup();
+                    
+                    // Show alert popup for major milestones
+                    if (ach.threshold === 3 || ach.threshold === financeTerms.length) {
+                        setTimeout(() => {
+                            alert(`🎉 Achievement Unlocked: ${ach.name}\n${ach.description}`);
+                        }, 500);
+                    }
+                }
+            }
+        });
+    }
+
+    function showAchievementNotification(achievement) {
+        const notif = document.createElement('div');
+        notif.className = 'achievement-notif';
+        notif.textContent = `⭐ ${achievement.name}`;
+        notif.style.position = 'fixed';
+        notif.style.bottom = '100px';
+        notif.style.right = '20px';
+        notif.style.background = 'rgba(0,0,0,0.8)';
+        notif.style.padding = '10px';
+        notif.style.borderRadius = '5px';
+        notif.style.zIndex = '200';
+        notif.style.maxWidth = '80%';
+        notif.style.animation = 'fadeIn 0.5s';
+        document.body.appendChild(notif);
+        
+        setTimeout(() => {
+            notif.style.animation = 'fadeIn 0.5s reverse';
+            setTimeout(() => notif.remove(), 500);
+        }, 1500);
+    }
+
+    function updateAchievementPopup() {
+        const list = document.getElementById("achievement-list");
         if (unlockedAchievements.length === 0) {
-            document.getElementById("achievement-list").textContent = "None yet. Keep clicking.";
+            list.innerHTML = "None yet. Keep clicking.";
         } else {
-            document.getElementById("achievement-list").textContent = unlockedAchievements.join(", ");
+            list.innerHTML = achievements
+                .filter(ach => unlockedAchievements.includes(ach.name))
+                .map(ach => `• <strong>${ach.name}</strong>: ${ach.description}<br>`)
+                .join('');
         }
     }
 
-    generateTerm(); // Show first term on load
+    function toggleAchievements() {
+        const popup = document.getElementById("achievement-popup");
+        popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Save progress in localStorage
+    function saveProgress() {
+        localStorage.setItem('financeExplainerProgress', JSON.stringify({
+            seenCount: seenCount,
+            uniqueTerms: Array.from(uniqueTermsSeen),
+            achievements: unlockedAchievements,
+            lastTerm: lastTerm
+        }));
+    }
+
+    // Load progress on page load
+    function loadProgress() {
+        const saved = localStorage.getItem('financeExplainerProgress');
+        if (saved) {
+            const data = JSON.parse(saved);
+            seenCount = data.seenCount || 0;
+            
+            // Restore unique terms
+            uniqueTermsSeen = new Set(data.uniqueTerms || []);
+            
+            // Restore achievements
+            unlockedAchievements = data.achievements || [];
+            
+            // Remove seen terms from queue
+            if (uniqueTermsSeen.size > 0) {
+                termsQueue = financeTerms.filter(term => !uniqueTermsSeen.has(term.term));
+                
+                // If we've seen the last term, show it again
+                if (data.lastTerm) {
+                    const lastTermData = financeTerms.find(t => t.term === data.lastTerm);
+                    if (lastTermData) {
+                        document.getElementById("term").textContent = lastTermData.term;
+                        document.getElementById("explanation").textContent = lastTermData.explanation;
+                        document.getElementById("scenario").textContent = scenarios[lastTermData.term] || "No scenario found, but life is still tough.";
+                        document.getElementById("term-emoji").textContent = lastTermData.emoji;
+                    }
+                }
+                
+                updateUI();
+                updateTermIndicators();
+                updateAchievementPopup();
+            }
+        }
+    }
+
+    // Handle mobile/touch devices better
+    document.addEventListener('touchstart', function() {}, {passive: true});
+
+    // Handle page visibility changes
+    document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'hidden') {
+            saveProgress();
+        }
+    });
+
+    // Try to load saved progress
+    loadProgress();
+
+    // Initialize first term if no saved progress
+    if (uniqueTermsSeen.size === 0) {
+        generateTerm();
+    }
 </script>
 </body>
 </html>
