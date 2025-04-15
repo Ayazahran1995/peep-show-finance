@@ -81,7 +81,6 @@
             font-family: 'Neue Machina', sans-serif; 
             font-size: clamp(0.9rem, 2vw, 1.2rem); 
             color: rgba(255, 255, 255, 0.8); 
-            margin-top: 15px; 
             font-style: italic; 
         }
 
@@ -249,6 +248,52 @@
             box-shadow: 0 0 5px #ff00ff;
         }
 
+        /* Collapsible Sections */
+        .collapsible-section {
+            margin: 15px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .section-header {
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            transition: background 0.3s;
+        }
+
+        .section-header:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .section-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .arrow {
+            margin-left: auto;
+            transition: transform 0.3s;
+        }
+
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .section-content.active {
+            max-height: 300px;
+            padding: 15px;
+        }
+
+        .collapsible-section.active .arrow {
+            transform: rotate(180deg);
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -309,7 +354,7 @@
     Seen <span id="seen-count">0</span> terms (<span id="unique-terms">0</span>/<span id="total-terms">12</span> unique)
 </div>
 
-<h1>💸 Finance Explained, But With More..Honesty</h1>
+<h1>💸 Finance Explained, But With More...Honesty</h1>
    
 <div class="cta-buttons">
     <button id="generate-btn" onclick="generateTerm()">Show Me The Terms</button>
@@ -318,8 +363,28 @@
 <div class="term-container" id="term-container">
     <div class="term-emoji" id="term-emoji">💸</div>
     <div class="term" id="term">Loading Financial Wokeness...</div>
-    <div class="explanation" id="explanation">Please hold.</div>
-    <div class="scenario" id="scenario">*Awkward scenario loading...*</div>
+    
+    <div class="collapsible-section" onclick="toggleSection('explanation-section')">
+        <div class="section-header">
+            <span class="section-icon">💡</span>
+            <span>What It Really Means</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="section-content" id="explanation-section">
+            <div class="explanation" id="explanation">Please hold.</div>
+        </div>
+    </div>
+    
+    <div class="collapsible-section" onclick="toggleSection('scenario-section')">
+        <div class="section-header">
+            <span class="section-icon">🎭</span>
+            <span>Real Life Example</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="section-content" id="scenario-section">
+            <div class="scenario" id="scenario">*Awkward scenario loading...*</div>
+        </div>
+    </div>
 </div>
 
 <!-- Doom Meter -->
@@ -339,6 +404,7 @@
     <strong>Achievements:</strong>
     <div id="achievement-list">None yet. Keep clicking.</div>
 </div>
+
 <script>
     // Finance terms and scenarios
     const financeTerms = [
@@ -365,7 +431,7 @@
         "Inflation": "You go to the shop and bread is £5. You pause, overwhelmed - but think, 'Time to get creative.' You adapt - and that's powerful.",
         "NFTs": "You drop £500 on a rare Pepe NFT. A week later, it's worth £3. Maybe next time, just get a meal from Pepe's - at least that comes with fries. But hey, in the grand meme economy, every Pepe finds its moment. Yours just might be ahead.",
         "Buy Now, Pay Later (BNPL)": "You buy a new TV with BNPL. A month later, you're eating instant noodles for every meal. Future You is judging Present You hard, but Present You is watching Netflix in HD — and learning to budget better. Character development!",
-        "Pension": "HR says: “Don’t forget your pension contributions.” You nod, like a responsible adult. Inside: ” Don’t worry, I wasn’t planning on retiring anyway.”  Still — small steps",
+        "Pension": "HR says: “Don’t forget your pension contributions.” You nod, like a responsible adult.Inside: ”Don’t worry, I wasn’t planning on retiring anyway.” Still — small steps.",
         "Mortgage": "You finally get a mortgage. The bank says, 'Congrats, you're now in debt for 25 years.' You celebrate by crying with pride into instant coffee. Because you've worked hard for this, and you'll handle what comes next.",
         "Venture Capital": "You? You put £100 in a stock, and when it drops 20%, you stare at your screen like it's a betrayal. Personal finance isn't venture capital. You don't get to lose 90% and still win. But maybe you're the next unicorn VC is betting on.",
         "Recession": "It's a recession. Your mate says, 'At least you've got your health!' You laugh awkwardly  - because hey, you've handled worse, and you'll figure this out too."
@@ -445,11 +511,27 @@
         // Save the last term shown
         lastTerm = termData.term;
 
+        // Make sections visible by default when generating a new term
+        document.getElementById('explanation-section').classList.add('active');
+        document.getElementById('scenario-section').classList.add('active');
+        document.querySelectorAll('.collapsible-section').forEach(section => {
+            section.classList.add('active');
+        });
+
         doomCount++;
         seenCount++;
         updateUI();
         checkAchievements();
         saveProgress();
+    }
+
+    function toggleSection(sectionId) {
+        // Stop event propagation to prevent multiple toggles
+        event.stopPropagation();
+        
+        const section = document.getElementById(sectionId);
+        section.classList.toggle('active');
+        section.parentElement.classList.toggle('active');
     }
 
     function updateTermIndicators() {
@@ -588,6 +670,13 @@
                         document.getElementById("explanation").textContent = lastTermData.explanation;
                         document.getElementById("scenario").textContent = scenarios[lastTermData.term] || "No scenario found, but life is still tough.";
                         document.getElementById("term-emoji").textContent = lastTermData.emoji;
+                        
+                        // Make sections visible by default
+                        document.getElementById('explanation-section').classList.add('active');
+                        document.getElementById('scenario-section').classList.add('active');
+                        document.querySelectorAll('.collapsible-section').forEach(section => {
+                            section.classList.add('active');
+                        });
                     }
                 }
                 
