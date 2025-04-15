@@ -91,9 +91,8 @@
             animation: bounce 2s infinite;
         }
 
-        /* MAKE IT WORSE BUTTON - NOW MORE VISIBLE */
         .cta-buttons { 
-            margin: 30px 0;
+            margin: 15px 0 25px;
             position: relative;
             z-index: 10;
             width: 100%;
@@ -102,10 +101,10 @@
         }
         
         .cta-buttons button {
-            background: transparent;
-            border: 2px solid white;
+            background: linear-gradient(90deg, #ff4500, #ff00ff);
+            border: none;
             color: white;
-            padding: clamp(10px, 2vw, 15px) clamp(15px, 3vw, 25px);
+            padding: clamp(12px, 2vw, 18px) clamp(20px, 3vw, 30px);
             border-radius: 50px;
             cursor: pointer;
             font-size: clamp(1rem, 2.5vw, 1.5rem);
@@ -113,11 +112,14 @@
             max-width: 100%;
             transition: all 0.3s ease;
             animation: pulse 2s infinite;
+            box-shadow: 0 4px 15px rgba(255, 0, 255, 0.3);
+            font-weight: bold;
+            letter-spacing: 0.5px;
         }
         
         .cta-buttons button:hover { 
-            background: white; 
-            color: black;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(255, 0, 255, 0.5);
             animation: none;
         }
 
@@ -308,6 +310,10 @@
 </div>
 
 <h1>💸 Finance Explained, But With More..Honesty</h1>
+   
+<div class="cta-buttons">
+    <button id="generate-btn" onclick="generateTerm()">Show Me The Terms</button>
+</div>
 
 <div class="term-container" id="term-container">
     <div class="term-emoji" id="term-emoji">💸</div>
@@ -333,12 +339,6 @@
     <strong>Achievements:</strong>
     <div id="achievement-list">None yet. Keep clicking.</div>
 </div>
-
-<!-- MAKE IT WORSE BUTTON - NOW MORE VISIBLE -->
-<div class="cta-buttons">
-    <button id="generate-btn" onclick="generateTerm()">Show Me The Terms</button>
-</div>
-
 <script>
     // Finance terms and scenarios
     const financeTerms = [
