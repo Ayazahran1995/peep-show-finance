@@ -294,6 +294,28 @@
             transform: rotate(180deg);
         }
 
+        /* Share button styles */
+        #share-btn {
+            background: linear-gradient(90deg, #3533cd, #ff00ff);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 15px auto;
+            display: block;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(53, 51, 205, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        #share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(53, 51, 205, 0.5);
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -431,7 +453,7 @@
         "Inflation": "You go to the shop and bread is £5. You pause, overwhelmed - but think, 'Time to get creative.' You adapt - and that's powerful.",
         "NFTs": "You drop £500 on a rare Pepe NFT. A week later, it's worth £3. Maybe next time, just get a meal from Pepe's - at least that comes with fries. But hey, in the grand meme economy, every Pepe finds its moment. Yours just might be ahead.",
         "Buy Now, Pay Later (BNPL)": "You buy a new TV with BNPL. A month later, you're eating instant noodles for every meal. Future You is judging Present You hard, but Present You is watching Netflix in HD — and learning to budget better. Character development!",
-        "Pension": "HR says: “Don’t forget your pension contributions.” You nod, like a responsible adult.Inside: ”Don’t worry, I wasn’t planning on retiring anyway.” Still — small steps.",
+        "Pension": "HR says: "Don't forget your pension contributions." You nod, like a responsible adult.Inside: "Don't worry, I wasn't planning on retiring anyway." Still — small steps.",
         "Mortgage": "You finally get a mortgage. The bank says, 'Congrats, you're now in debt for 25 years.' You celebrate by crying with pride into instant coffee. Because you've worked hard for this, and you'll handle what comes next.",
         "Venture Capital": "You? You put £100 in a stock, and when it drops 20%, you stare at your screen like it's a betrayal. Personal finance isn't venture capital. You don't get to lose 90% and still win. But maybe you're the next unicorn VC is betting on.",
         "Recession": "It's a recession. Your mate says, 'At least you've got your health!' You laugh awkwardly  - because hey, you've handled worse, and you'll figure this out too."
@@ -523,11 +545,21 @@
         updateUI();
         checkAchievements();
         saveProgress();
+        
+        // Remove any existing share button before adding new one
+        const existingBtn = document.getElementById("share-btn");
+        if (existingBtn) existingBtn.remove();
+        
+        // Add the share button
+        addShareButton();
     }
 
     function toggleSection(sectionId) {
+        // Get the event object properly
+        const event = window.event || arguments.callee.caller.arguments[0];
+        
         // Stop event propagation to prevent multiple toggles
-        event.stopPropagation();
+        if (event) event.stopPropagation();
         
         const section = document.getElementById(sectionId);
         section.classList.toggle('active');
@@ -687,23 +719,84 @@
         }
     }
 
-    // Handle mobile/touch devices better
-    document.addEventListener('touchstart', function() {}, {passive: true});
-
-    // Handle page visibility changes
-    document.addEventListener('visibilitychange', function() {
-        if (document.visibilityState === 'hidden') {
-            saveProgress();
-        }
-    });
-
-    // Try to load saved progress
-    loadProgress();
-
-    // Initialize first term if no saved progress
-    if (uniqueTermsSeen.size === 0) {
-        generateTerm();
+    // Share button functionality
+    function generateShareableImage() {
+        // Get current term data
+        const term = document.getElementById("term").textContent;
+        const emoji = document.getElementById("term-emoji").textContent;
+        const explanation
+            // Share button functionality
+    function addShareButton() {
+        // Remove existing button if present
+        const existingBtn = document.getElementById("share-btn");
+        if (existingBtn) existingBtn.remove();
+        
+        // Create new share button
+        const shareBtn = document.createElement("button");
+        shareBtn.id = "share-btn";
+        shareBtn.textContent = "Share This Term";
+        shareBtn.onclick = shareTerm;
+        
+        // Insert after the term container
+        const termContainer = document.getElementById("term-container");
+        termContainer.parentNode.insertBefore(shareBtn, termContainer.nextSibling);
     }
+
+    function shareTerm() {
+        const term = document.getElementById("term").textContent;
+        const emoji = document.getElementById("term-emoji").textContent;
+        const explanation = document.getElementById("explanation").textContent;
+        
+        // Create share text
+        const shareText = `${emoji} ${term}\n\n${explanation}\n\n💸 Learn more financial truths at [yourwebsite.com]`;
+        
+        // Use Web Share API if available
+        if (navigator.share) {
+            navigator.share({
+                title: `Finance Explained: ${term}`,
+                text: shareText,
+                url: window.location.href
+            }).catch(err => {
+                console.log('Error sharing:', err);
+                fallbackShare(shareText);
+            });
+        } else {
+            fallbackShare(shareText);
+        }
+    }
+
+    function fallbackShare(shareText) {
+        // Copy to clipboard
+        navigator.clipboard.writeText(shareText).then(() => {
+            alert("Copied to clipboard! Paste it anywhere to share.");
+        }).catch(err => {
+            console.error('Failed to copy:', err);
+            // Fallback to opening mailto link
+            const subject = `Finance Explained: ${document.getElementById("term").textContent}`;
+            const body = shareText;
+            window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+        });
+    }
+
+    // Initialize the page
+    window.onload = function() {
+        loadProgress();
+        
+        // Generate first term if none loaded from storage
+        if (uniqueTermsSeen.size === 0) {
+            generateTerm();
+        }
+        
+        // Close achievement popup when clicking outside
+        document.addEventListener('click', function(event) {
+            const achievementBadge = document.getElementById('achievement-badge');
+            const achievementPopup = document.getElementById('achievement-popup');
+            
+            if (!achievementBadge.contains(event.target) && !achievementPopup.contains(event.target)) {
+                achievementPopup.style.display = 'none';
+            }
+        });
+    };
 </script>
 </body>
 </html>
