@@ -81,6 +81,7 @@
             font-family: 'Neue Machina', sans-serif; 
             font-size: clamp(0.9rem, 2vw, 1.2rem); 
             color: rgba(255, 255, 255, 0.8); 
+            margin-top: 15px; 
             font-style: italic; 
         }
 
@@ -90,8 +91,9 @@
             animation: bounce 2s infinite;
         }
 
+        /* MAKE IT WORSE BUTTON - NOW MORE VISIBLE */
         .cta-buttons { 
-            margin: 15px 0 25px;
+            margin: 30px 0;
             position: relative;
             z-index: 10;
             width: 100%;
@@ -100,10 +102,10 @@
         }
         
         .cta-buttons button {
-            background: linear-gradient(90deg, #ff4500, #ff00ff);
-            border: none;
+            background: transparent;
+            border: 2px solid white;
             color: white;
-            padding: clamp(12px, 2vw, 18px) clamp(20px, 3vw, 30px);
+            padding: clamp(10px, 2vw, 15px) clamp(15px, 3vw, 25px);
             border-radius: 50px;
             cursor: pointer;
             font-size: clamp(1rem, 2.5vw, 1.5rem);
@@ -111,14 +113,11 @@
             max-width: 100%;
             transition: all 0.3s ease;
             animation: pulse 2s infinite;
-            box-shadow: 0 4px 15px rgba(255, 0, 255, 0.3);
-            font-weight: bold;
-            letter-spacing: 0.5px;
         }
         
         .cta-buttons button:hover { 
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(255, 0, 255, 0.5);
+            background: white; 
+            color: black;
             animation: none;
         }
 
@@ -248,74 +247,6 @@
             box-shadow: 0 0 5px #ff00ff;
         }
 
-        /* Collapsible Sections */
-        .collapsible-section {
-            margin: 15px 0;
-            border-radius: 10px;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .section-header {
-            padding: 12px 15px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.1);
-            transition: background 0.3s;
-        }
-
-        .section-header:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .section-icon {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
-        .arrow {
-            margin-left: auto;
-            transition: transform 0.3s;
-        }
-
-        .section-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-        }
-
-        .section-content.active {
-            max-height: 300px;
-            padding: 15px;
-        }
-
-        .collapsible-section.active .arrow {
-            transform: rotate(180deg);
-        }
-
-        /* Share button styles */
-        #share-btn {
-            background: linear-gradient(90deg, #3533cd, #ff00ff);
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            margin: 15px auto;
-            display: block;
-            font-family: inherit;
-            font-size: 16px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(53, 51, 205, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        #share-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(53, 51, 205, 0.5);
-        }
-
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -376,37 +307,13 @@
     Seen <span id="seen-count">0</span> terms (<span id="unique-terms">0</span>/<span id="total-terms">12</span> unique)
 </div>
 
-<h1>💸 Finance Explained, But With More...Honesty</h1>
-   
-<div class="cta-buttons">
-    <button id="generate-btn" onclick="generateTerm()">Show Me The Terms</button>
-</div>
+<h1>💸 Finance Explained, But With More..Honesty</h1>
 
 <div class="term-container" id="term-container">
     <div class="term-emoji" id="term-emoji">💸</div>
     <div class="term" id="term">Loading Financial Wokeness...</div>
-    
-    <div class="collapsible-section" onclick="toggleSection('explanation-section')">
-        <div class="section-header">
-            <span class="section-icon">💡</span>
-            <span>What It Really Means</span>
-            <span class="arrow">▼</span>
-        </div>
-        <div class="section-content" id="explanation-section">
-            <div class="explanation" id="explanation">Please hold.</div>
-        </div>
-    </div>
-    
-    <div class="collapsible-section" onclick="toggleSection('scenario-section')">
-        <div class="section-header">
-            <span class="section-icon">🎭</span>
-            <span>Real Life Example</span>
-            <span class="arrow">▼</span>
-        </div>
-        <div class="section-content" id="scenario-section">
-            <div class="scenario" id="scenario">*Awkward scenario loading...*</div>
-        </div>
-    </div>
+    <div class="explanation" id="explanation">Please hold.</div>
+    <div class="scenario" id="scenario">*Awkward scenario loading...*</div>
 </div>
 
 <!-- Doom Meter -->
@@ -427,6 +334,11 @@
     <div id="achievement-list">None yet. Keep clicking.</div>
 </div>
 
+<!-- MAKE IT WORSE BUTTON - NOW MORE VISIBLE -->
+<div class="cta-buttons">
+    <button id="generate-btn" onclick="generateTerm()">Show Me The Terms</button>
+</div>
+
 <script>
     // Finance terms and scenarios
     const financeTerms = [
@@ -438,7 +350,7 @@
         { term: "Inflation", emoji: "🔥", explanation: "Inflation is when everything costs more, but your salary stays the same. It's like trying to run up an escalator that's going down. And it's on fire." },
         { term: "NFTs", emoji: "🖼️", explanation: "NFTs are like buying an expensive painting, except there's no painting. Just the 'vibes' of a painting. Oh, and your vibes are now worth 3p." },
         { term: "Buy Now, Pay Later (BNPL)", emoji: "💳", explanation: "Buy Now, Pay Later is basically Future You's problem. Except Future You is already drowning in questionable financial decisions. Cheers, mate." },
-        { term: "Pension", emoji: "👴", explanation: "A pension is a long game of chase — you spend decades saving for retirement, only for the finish line to keep moving." },
+        { term: "Pension", emoji: "👴", explanation: "A pension is a slow-motion heist where you spend decades trying to save enough money to retire, but by the time you do, they've moved the goalposts to 'work until you drop.'" },
         { term: "Mortgage", emoji: "🏠", explanation: "A mortgage is a 25-year deal where you rent from the bank, except instead of a landlord, you have an interest rate that judges you." },
         { term: "Venture Capital", emoji: "🦄", explanation: "Unicorns might be fictional, but in VC, the odds of finding one are slim, never zero. VC is placing 100 bets, knowing 90 will fail spectacularly, but the 10 that win might just buy them an island. One big win makes all the losses worth it." },
         { term: "Recession", emoji: "📉", explanation: "A recession is when the economy throws a tantrum and suddenly everyone pretends they didn't see it coming. Again." }
@@ -453,7 +365,7 @@
         "Inflation": "You go to the shop and bread is £5. You pause, overwhelmed - but think, 'Time to get creative.' You adapt - and that's powerful.",
         "NFTs": "You drop £500 on a rare Pepe NFT. A week later, it's worth £3. Maybe next time, just get a meal from Pepe's - at least that comes with fries. But hey, in the grand meme economy, every Pepe finds its moment. Yours just might be ahead.",
         "Buy Now, Pay Later (BNPL)": "You buy a new TV with BNPL. A month later, you're eating instant noodles for every meal. Future You is judging Present You hard, but Present You is watching Netflix in HD — and learning to budget better. Character development!",
-        "Pension": "HR says: "Don't forget your pension contributions." You nod, like a responsible adult.Inside: "Don't worry, I wasn't planning on retiring anyway." Still — small steps.",
+        "Pension": "You check your pension and it says you'll retire at 85. You laugh, but know it's not too late. Small steps matter.",
         "Mortgage": "You finally get a mortgage. The bank says, 'Congrats, you're now in debt for 25 years.' You celebrate by crying with pride into instant coffee. Because you've worked hard for this, and you'll handle what comes next.",
         "Venture Capital": "You? You put £100 in a stock, and when it drops 20%, you stare at your screen like it's a betrayal. Personal finance isn't venture capital. You don't get to lose 90% and still win. But maybe you're the next unicorn VC is betting on.",
         "Recession": "It's a recession. Your mate says, 'At least you've got your health!' You laugh awkwardly  - because hey, you've handled worse, and you'll figure this out too."
@@ -533,37 +445,11 @@
         // Save the last term shown
         lastTerm = termData.term;
 
-        // Make sections visible by default when generating a new term
-        document.getElementById('explanation-section').classList.add('active');
-        document.getElementById('scenario-section').classList.add('active');
-        document.querySelectorAll('.collapsible-section').forEach(section => {
-            section.classList.add('active');
-        });
-
         doomCount++;
         seenCount++;
         updateUI();
         checkAchievements();
         saveProgress();
-        
-        // Remove any existing share button before adding new one
-        const existingBtn = document.getElementById("share-btn");
-        if (existingBtn) existingBtn.remove();
-        
-        // Add the share button
-        addShareButton();
-    }
-
-    function toggleSection(sectionId) {
-        // Get the event object properly
-        const event = window.event || arguments.callee.caller.arguments[0];
-        
-        // Stop event propagation to prevent multiple toggles
-        if (event) event.stopPropagation();
-        
-        const section = document.getElementById(sectionId);
-        section.classList.toggle('active');
-        section.parentElement.classList.toggle('active');
     }
 
     function updateTermIndicators() {
@@ -702,13 +588,6 @@
                         document.getElementById("explanation").textContent = lastTermData.explanation;
                         document.getElementById("scenario").textContent = scenarios[lastTermData.term] || "No scenario found, but life is still tough.";
                         document.getElementById("term-emoji").textContent = lastTermData.emoji;
-                        
-                        // Make sections visible by default
-                        document.getElementById('explanation-section').classList.add('active');
-                        document.getElementById('scenario-section').classList.add('active');
-                        document.querySelectorAll('.collapsible-section').forEach(section => {
-                            section.classList.add('active');
-                        });
                     }
                 }
                 
@@ -719,84 +598,23 @@
         }
     }
 
-    // Share button functionality
-    function generateShareableImage() {
-        // Get current term data
-        const term = document.getElementById("term").textContent;
-        const emoji = document.getElementById("term-emoji").textContent;
-        const explanation
-            // Share button functionality
-    function addShareButton() {
-        // Remove existing button if present
-        const existingBtn = document.getElementById("share-btn");
-        if (existingBtn) existingBtn.remove();
-        
-        // Create new share button
-        const shareBtn = document.createElement("button");
-        shareBtn.id = "share-btn";
-        shareBtn.textContent = "Share This Term";
-        shareBtn.onclick = shareTerm;
-        
-        // Insert after the term container
-        const termContainer = document.getElementById("term-container");
-        termContainer.parentNode.insertBefore(shareBtn, termContainer.nextSibling);
-    }
+    // Handle mobile/touch devices better
+    document.addEventListener('touchstart', function() {}, {passive: true});
 
-    function shareTerm() {
-        const term = document.getElementById("term").textContent;
-        const emoji = document.getElementById("term-emoji").textContent;
-        const explanation = document.getElementById("explanation").textContent;
-        
-        // Create share text
-        const shareText = `${emoji} ${term}\n\n${explanation}\n\n💸 Learn more financial truths at [yourwebsite.com]`;
-        
-        // Use Web Share API if available
-        if (navigator.share) {
-            navigator.share({
-                title: `Finance Explained: ${term}`,
-                text: shareText,
-                url: window.location.href
-            }).catch(err => {
-                console.log('Error sharing:', err);
-                fallbackShare(shareText);
-            });
-        } else {
-            fallbackShare(shareText);
+    // Handle page visibility changes
+    document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'hidden') {
+            saveProgress();
         }
-    }
+    });
 
-    function fallbackShare(shareText) {
-        // Copy to clipboard
-        navigator.clipboard.writeText(shareText).then(() => {
-            alert("Copied to clipboard! Paste it anywhere to share.");
-        }).catch(err => {
-            console.error('Failed to copy:', err);
-            // Fallback to opening mailto link
-            const subject = `Finance Explained: ${document.getElementById("term").textContent}`;
-            const body = shareText;
-            window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
-        });
-    }
+    // Try to load saved progress
+    loadProgress();
 
-    // Initialize the page
-    window.onload = function() {
-        loadProgress();
-        
-        // Generate first term if none loaded from storage
-        if (uniqueTermsSeen.size === 0) {
-            generateTerm();
-        }
-        
-        // Close achievement popup when clicking outside
-        document.addEventListener('click', function(event) {
-            const achievementBadge = document.getElementById('achievement-badge');
-            const achievementPopup = document.getElementById('achievement-popup');
-            
-            if (!achievementBadge.contains(event.target) && !achievementPopup.contains(event.target)) {
-                achievementPopup.style.display = 'none';
-            }
-        });
-    };
+    // Initialize first term if no saved progress
+    if (uniqueTermsSeen.size === 0) {
+        generateTerm();
+    }
 </script>
 </body>
 </html>
