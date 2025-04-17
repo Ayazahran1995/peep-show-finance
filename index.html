@@ -56,7 +56,7 @@
             padding: 20px;
             width: 90%;
             max-width: 700px;
-            margin: 120px auto 20px;
+            margin: 90px auto 20px;
             background: rgba(0, 0, 0, 0.5);
             border-radius: 20px;
             backdrop-filter: blur(10px);
@@ -91,7 +91,7 @@
         }
 
         .cta-buttons { 
-            margin: 15px 0 25px;
+            margin: 0 0 10px;
             position: relative;
             z-index: 10;
             width: 100%;
@@ -254,7 +254,7 @@
             box-shadow: 0 0 5px #ff00ff;
         }
 
-        /* Collapsible Sections - NEW SIDE-BY-SIDE LAYOUT */
+        /* Collapsible Sections */
         .sections-container {
             display: flex;
             flex-wrap: wrap;
@@ -325,7 +325,7 @@
             100% { transform: scale(1); }
         }
 
-        /* Media queries for better responsiveness */
+        /* Media queries */
         @media (max-width: 768px) {
             .sections-container {
                 flex-direction: column;
@@ -337,7 +337,7 @@
             }
 
             .term-container {
-                margin-top: 100px;
+                margin-top: 80px;
             }
 
             #doom-meter-container {
@@ -352,7 +352,7 @@
             
             .term-container {
                 padding: 15px;
-                margin: 100px auto 10px;
+                margin: 80px auto 10px;
             }
             
             #achievement-popup {
@@ -362,30 +362,24 @@
             }
         }
         
-        /* Taller mobile screens */
         @media (max-height: 700px) {
             .term-container {
-                margin: 100px auto 5px;
-            }
-            
-            .cta-buttons {
-                margin: 15px 0;
+                margin: 80px auto 5px;
             }
         }
     </style>
 </head>
 <body>
 
-
+<!-- Progress Ribbon -->
+<div id="progress-ribbon">
+    Seen <span id="seen-count">0</span> terms (<span id="unique-terms">0</span>/<span id="total-terms">12</span> unique)
+</div>
 <div id="doom-meter-container">
     <div id="doom-meter">
         <div id="doom-fill"></div>
     </div>
     <div id="doom-message">Welcome to Your Finance Bro Days.</div>
-</div>
-    <!-- Progress Ribbon -->
-<div id="progress-ribbon">
-    Seen <span id="seen-count">0</span> terms (<span id="unique-terms">0</span>/<span id="total-terms">12</span> unique)
 </div>
 
 <!-- Term Progress Indicators -->
@@ -408,7 +402,6 @@
     <div class="term-emoji" id="term-emoji">💸</div>
     <div class="term" id="term">Loading Financial Wokeness...</div>
     
-    <!-- NEW SIDE-BY-SIDE SECTIONS CONTAINER -->
     <div class="sections-container">
         <div class="collapsible-section" onclick="toggleSection('explanation-section')">
             <div class="section-header">
